@@ -1,0 +1,19 @@
+# to exclude Obsidian workspace settings (including plugin and hotkey configurations)
+# 碩士/Notes/.obsidian/
+
+# OR only to exclude workspace cache
+碩士/Notes/.obsidian/themes/
+# 碩士/Notes/.obsidian/snippets/
+# 碩士/Notes/.obsidian/app.json
+# 碩士/Notes/.obsidian/appearance.json
+碩士/Notes/.obsidian/core-plugins.json
+# 碩士/Notes/.obsidian/graph.json
+碩士/Notes/.obsidian/hotkeys.json
+# 碩士/Notes/.obsidian/workspace
+
+# This file is used to keep track of last auto backup/pull
+# 碩士/Notes/.obsidian-git-data
+
+# Add below lines to exclude OS settings and caches
+碩士/Notes/.trash/
+碩士/Notes/.DS_Store

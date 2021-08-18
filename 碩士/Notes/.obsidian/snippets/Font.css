@@ -1,0 +1,39 @@
+/* Source font setup */
+@font-face {
+	font-family: font-source;
+	src: local('微軟正黑體'), local('Microsoft JhengHei');
+	unicode-range: U+4E00-9FFF;
+}
+
+@font-face {
+	font-family: font-source;
+	src: local('Consolas');
+	unicode-range: U+00-024F;
+}
+
+.markdown-source-view {
+  font-family: font-source !important;
+  font-size: 18px;
+}
+
+/* Preview font setup */
+@font-face {
+	font-family: font-preview;
+	src: local('標楷體'), local('DFKai-SB');
+	unicode-range: U+4E00-9FFF;
+}
+
+@font-face {
+	font-family: font-preview;
+	src: local('Times New Roman'), local('Times');
+	unicode-range: U+00-024F;
+}
+
+.markdown-preview-view {
+  font-family: font-preview !important;
+  font-size: 18px;
+}
+
+p {
+	text-indent: 2em;
+}

@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Training.md",
+            "file": "Reinforcement Learning.md",
             "mode": "source"
           }
         },
@@ -21,8 +21,8 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Training.md",
-            "mode": "source"
+            "file": "Reinforcement Learning.md",
+            "mode": "preview"
           }
         },
         "group": "897a5083fdd3e391"
@@ -82,7 +82,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Training.md",
+                "file": "Reinforcement Learning.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,8 +100,9 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "e5cf203a809de1b1",
+  "active": "54b4730555aacad5",
   "lastOpenFiles": [
+    "Reinforcement Learning.md",
     "Training.md",
     "Flight Controller via Deep Reinforcement Learning/Abstract.md",
     "未命名.md"

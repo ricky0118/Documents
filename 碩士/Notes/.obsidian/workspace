@@ -4,7 +4,7 @@
     "type": "split",
     "children": [
       {
-        "id": "e5cf203a809de1b1",
+        "id": "6dc0f7993d6828fe",
         "type": "leaf",
         "state": {
           "type": "markdown",
@@ -13,7 +13,7 @@
             "mode": "source"
           }
         },
-        "group": "897a5083fdd3e391"
+        "group": "6965bb07c1d6b7d6"
       },
       {
         "id": "54b4730555aacad5",
@@ -25,7 +25,7 @@
             "mode": "preview"
           }
         },
-        "group": "897a5083fdd3e391"
+        "group": "6965bb07c1d6b7d6"
       }
     ],
     "direction": "vertical"
@@ -65,8 +65,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "4e4b819fad16c414",
@@ -100,10 +99,11 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "54b4730555aacad5",
+  "active": "6dc0f7993d6828fe",
   "lastOpenFiles": [
     "Reinforcement Learning.md",
     "Training.md",
+    "Reward system.md",
     "Flight Controller via Deep Reinforcement Learning/Abstract.md",
     "未命名.md"
   ]

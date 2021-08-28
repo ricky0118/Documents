@@ -17,3 +17,12 @@
 # Add below lines to exclude OS settings and caches
 碩士/Notes/.trash/
 碩士/Notes/.DS_Store
+
+# Latex log file
+*.log
+*.aux
+*.nav
+*.out
+*.snm
+*.synctex.gz
+*.toc

@@ -5,23 +5,52 @@
     <style type="text/css">
         body{
             background-color: gray;
+            margin: 0px;
+            font-family: Consolas;
+        }
+        .title{
+            background-color: blue;
+            margin: 0px;
+            padding: 5px;
+            text-align: center;
+            font-size: 40px;
+            color: white;
+        }
+        .subtitle{
+            margin: 5px;
+            padding: 5px;
+            border-radius: 10px;
+            background-color: green;
+            font-size: 25px;
+            text-align: left;
         }
         .content{
             margin: 0px;
+            padding: 15%;
+            padding-top: 0px;
             margin-left: auto;
             margin-right: auto;
             text-align: center;
         }
-        #calender{
+        a{
+            color: white;
+            text-decoration: none;
+        }
+        #calendar{
             text-align: center;
-            width: 80%;
+            width: 95%;
             height: 500px;
         }
     </style>
 </head>
-<body class="content">
-    <div >
-        <iframe id="calender" src="https://calendar.google.com/calendar/embed?&wkst=2&bgcolor=%23ffffff&ctz=Asia%2FTaipei&src=cmlja3k2MjA1QGdtYWlsLmNvbQ&src=aW5uZzh1ajdwZHNtczk1YW92ODdodjJobmNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=bnZ2b2VnNmFwaWk3ZW1tdjczcGVhbXJnbW9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%233F51B5&color=%239E69AF&color=%23616161&showTz=0&showCalendars=0&showTabs=1&showPrint=1&showDate=1&showNav=1&showTitle=0&mode=Week" \>
+<body >
+    <div class="title">Working Page</div>
+
+    <div class="content">
+        <div class="subtitle">
+            <a href="https://calendar.google.com/calendar/u/0/r/week">Calendar</a>
+        </div>
+        <iframe id="calendar" src="https://calendar.google.com/calendar/embed?&wkst=2&bgcolor=%23ffffff&ctz=Asia%2FTaipei&src=cmlja3k2MjA1QGdtYWlsLmNvbQ&src=aW5uZzh1ajdwZHNtczk1YW92ODdodjJobmNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=bnZ2b2VnNmFwaWk3ZW1tdjczcGVhbXJnbW9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%233F51B5&color=%239E69AF&color=%23616161&showTz=0&showCalendars=0&showTabs=1&showPrint=1&showDate=1&showNav=1&showTitle=0&mode=Week" \>
     </div>
 </body>
 </html>

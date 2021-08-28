@@ -12,8 +12,7 @@
             "file": "Reinforcement Learning.md",
             "mode": "source"
           }
-        },
-        "group": "6965bb07c1d6b7d6"
+        }
       },
       {
         "id": "54b4730555aacad5",
@@ -24,8 +23,7 @@
             "file": "Reinforcement Learning.md",
             "mode": "preview"
           }
-        },
-        "group": "6965bb07c1d6b7d6"
+        }
       }
     ],
     "direction": "vertical"
@@ -65,7 +63,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "4e4b819fad16c414",
@@ -99,7 +98,7 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "6dc0f7993d6828fe",
+  "active": "54b4730555aacad5",
   "lastOpenFiles": [
     "Reinforcement Learning.md",
     "Training.md",

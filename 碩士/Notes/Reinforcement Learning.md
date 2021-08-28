@@ -28,14 +28,14 @@ RL algorithm is a tuner of NN. It determines ==how the NN weights are updated== 
 
 ^278105
 
-- Deep Deterministic Policy Gradient (DDPG)
-It provides improvement to Deep Q-Network (DQN) for the continuous action domain. It is also a model-free algorithm meaning it ==can learn the policy without having to first generate a model==.
+> ### Deep Deterministic Policy Gradient (DDPG)
+> It provides improvement to Deep Q-Network (DQN) for the continuous action domain. It is also a model-free algorithm meaning it ==can learn the policy without having to first generate a model==.
 
-- Trust Region Policy Optimization (TRPO)
-It's similar to natural gradient policy methods however this method guarantees monotonic improvement.
+> ### Trust Region Policy Optimization (TRPO)
+> It's similar to natural gradient policy methods however this method guarantees monotonic improvement.
 
-- Proximal Policy Optimization (PPO)
-PPO is also a policy gradient method and has similarities to TRPO. Many RL algorithms can be very sensitive to hyperparameter tuning in to obtain good results. Part of the reason PPO is so widely adopted is due to it being easier to tune than other RL algorithms.
+> ### Proximal Policy Optimization (PPO)
+> PPO is also a policy gradient method and has similarities to TRPO. Many RL algorithms can be very sensitive to hyperparameter tuning in to obtain good results. Part of the reason PPO is so widely adopted is due to it being easier to tune than other RL algorithms.
 
 ## The challenges in RL for Attitude Control
 
@@ -54,4 +54,4 @@ It remains unknown what range of uncertainty the controller can operate safely b
 > Adaptiveness refers to the controller's performance to adapt to the uncertainties by adjusting the control parameters.
 
 ### Reward Engineering
-
+In the context of attitude control, the reward must encapsulate the agent's performance achieving the desired attitude goals. As goals become more complex and demanding identifying which performance metrics are most expressive will be necessary to push the performance.

@@ -1,0 +1,36 @@
+\documentclass{beamer}
+% \usepackage{xeCJK}
+\usepackage{wrapfig}
+\usepackage{multicol}
+\usetheme{Madrid}
+\renewcommand{\familydefault}{\rmdefault}
+
+\date{July 19, 2021}
+\title{Meeting}
+\author{PO-HSUN WU}
+
+\begin{document}
+    \frame{\titlepage}
+
+    \begin{frame}{Progress report}
+    \begin{itemize}
+        \item Introduction of Digital Twin.
+        \begin{itemize}
+            \item High fidelity simulator.
+            \item Prebuilt aircraft models from Gazebo or PX4 .
+        \end{itemize}
+        \item Some RL algorithm.
+        \begin{itemize}
+            \item Deep Deterministic Policy Gradient(DDPG)\\
+            \hspace{1em}Provides improvement to Deep Q-Network(DQN) for the continuous action domain.
+            \item Trust Region Policy Optimization(TRPO)
+            \item Proximal Policy Optimization(PPO)
+        \end{itemize}
+    \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Progress report}
+        \centering
+        \includegraphics[scale=0.5]{agent_diagram.png}
+    \end{frame}
+\end{document}

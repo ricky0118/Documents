@@ -1,0 +1,252 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>HW2</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-11-01"><meta name="DC.source" content="HW2.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">#2</a></li><li><a href="#2">#3</a></li></ul></div><h2 id="1">#2</h2><pre class="codeinput">clear;clc;close <span class="string">all</span>
+r_ijk = [8228 389 6888];
+v_ijk = [-0.7 6.6 -0.6];
+[a, ecc, i, Omega, omega, theta] = ijk2keplerian(r_ijk, v_ijk)
+</pre><pre class="codeoutput">
+a =
+
+   1.3361e+04
+
+
+ecc =
+
+    0.1376    0.1284    0.1149
+
+
+i =
+
+    0.6970
+
+
+Omega =
+
+    4.7099
+
+
+omega =
+
+    2.1943
+
+
+theta =
+
+    5.6978
+
+</pre><h2 id="2">#3</h2><pre class="codeinput">clear;clc;close <span class="string">all</span>
+r_ijk = [8228 389 6888]';
+v_ijk = [-0.7 6.6 -0.6]';
+x = [r_ijk; v_ijk];
+
+[t, x] = ode45(@fun, [0 2*60*60], x);
+plot3(x(:,1),x(:,2),x(:,3))
+grid()
+
+<span class="keyword">function</span> [a, ecc, i, Omega, omega, theta] = ijk2keplerian(r, v)
+    GM = 3.986e5;
+    ui = [1 0 0];
+    uk = [0 0 1];
+
+    mag_r = norm(r);
+    mag_v = norm(v);
+
+    Ener = mag_v^2/2 - GM/mag_r;
+    a = -GM/(2*Ener);
+
+    h = cross(r,v)/norm(cross(r,v));
+    i = acos(dot(h,uk));
+
+    ecc = -(cross(cross(r,v),v)/GM + r/mag_r);
+    mag_ecc = norm(ecc);
+
+    N = cross(uk,h);
+    mag_N = norm(N);
+
+    cos_Omega = dot(ui,N)/mag_N;
+    sin_Omega = cross(ui,N)/mag_N;
+
+    Omega = atan2(sin_Omega(3), cos_Omega);
+    <span class="keyword">if</span> Omega&lt;0
+        Omega = Omega+2*pi();
+    <span class="keyword">end</span>
+
+    cos_omega = dot(N,ecc)/(mag_N*mag_ecc);
+    sin_omega = dot(cross(N,ecc)/(mag_N*mag_ecc), h);
+    omega = atan2(sin_omega, cos_omega);
+    <span class="keyword">if</span> omega&lt;0
+        omega = omega+2*pi();
+    <span class="keyword">end</span>
+
+    cos_theta = dot(ecc,r)/(mag_ecc*mag_r);
+    sin_theta = dot(cross(ecc,r)/(mag_ecc*mag_r), h);
+    theta = atan2(sin_theta,cos_theta);
+    <span class="keyword">if</span> theta&lt;0
+        theta = theta+2*pi();
+    <span class="keyword">end</span>
+
+    E = 2*atan(sqrt((1-mag_ecc)/(1+mag_ecc))*tan(theta/2));
+    M = E-mag_ecc*sin(E);
+<span class="comment">%     sqrt(a^3/GM)*M</span>
+
+<span class="keyword">end</span>
+
+<span class="keyword">function</span> dxdt = fun(t, x)
+    GM = 3.986e5;
+    mag_r = norm(x);
+<span class="comment">%     A = [   0   1</span>
+<span class="comment">%         -GM/r^3 0];</span>
+    r = x(1:3);
+    v = x(4:6);
+
+    dxdt = zeros(6,1);
+    dxdt(1:3) = v;
+    dxdt(4:6) = -GM/mag_r^3*r;
+<span class="keyword">end</span>
+</pre><img vspace="5" hspace="5" src="HW2_01.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% #2
+clear;clc;close all
+r_ijk = [8228 389 6888];
+v_ijk = [-0.7 6.6 -0.6];
+[a, ecc, i, Omega, omega, theta] = ijk2keplerian(r_ijk, v_ijk)
+
+%% #3
+clear;clc;close all
+r_ijk = [8228 389 6888]';
+v_ijk = [-0.7 6.6 -0.6]';
+x = [r_ijk; v_ijk];
+
+[t, x] = ode45(@fun, [0 2*60*60], x);
+plot3(x(:,1),x(:,2),x(:,3))
+grid()
+
+function [a, ecc, i, Omega, omega, theta] = ijk2keplerian(r, v)
+    GM = 3.986e5;
+    ui = [1 0 0];
+    uk = [0 0 1];
+    
+    mag_r = norm(r);
+    mag_v = norm(v);
+    
+    Ener = mag_v^2/2 - GM/mag_r;
+    a = -GM/(2*Ener);
+    
+    h = cross(r,v)/norm(cross(r,v));
+    i = acos(dot(h,uk));
+    
+    ecc = -(cross(cross(r,v),v)/GM + r/mag_r);
+    mag_ecc = norm(ecc);
+    
+    N = cross(uk,h);
+    mag_N = norm(N);
+    
+    cos_Omega = dot(ui,N)/mag_N;
+    sin_Omega = cross(ui,N)/mag_N;
+    
+    Omega = atan2(sin_Omega(3), cos_Omega);
+    if Omega<0
+        Omega = Omega+2*pi();
+    end    
+    
+    cos_omega = dot(N,ecc)/(mag_N*mag_ecc);
+    sin_omega = dot(cross(N,ecc)/(mag_N*mag_ecc), h);
+    omega = atan2(sin_omega, cos_omega);
+    if omega<0
+        omega = omega+2*pi();
+    end
+    
+    cos_theta = dot(ecc,r)/(mag_ecc*mag_r);
+    sin_theta = dot(cross(ecc,r)/(mag_ecc*mag_r), h);
+    theta = atan2(sin_theta,cos_theta);
+    if theta<0
+        theta = theta+2*pi();
+    end
+
+    E = 2*atan(sqrt((1-mag_ecc)/(1+mag_ecc))*tan(theta/2));
+    M = E-mag_ecc*sin(E);
+%     sqrt(a^3/GM)*M
+
+end
+
+function dxdt = fun(t, x)
+    GM = 3.986e5;
+    mag_r = norm(x);
+%     A = [   0   1
+%         -GM/r^3 0];
+    r = x(1:3);
+    v = x(4:6);
+    
+    dxdt = zeros(6,1);
+    dxdt(1:3) = v;
+    dxdt(4:6) = -GM/mag_r^3*r;
+end
+##### SOURCE END #####
+--></body></html>

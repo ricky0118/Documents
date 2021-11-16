@@ -1,0 +1,156 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Advanced Dynamics HW.1</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-10-17"><meta name="DC.source" content="HW1.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Advanced Dynamics HW.1</h1><!--introduction--><p>Programer: PO-HSUN WU Last edit date: 2021/10/17 ??:??</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Define some value</a></li><li><a href="#2">Transformation matrices between different frame</a></li><li><a href="#3">Position vector of the particle</a></li><li><a href="#4">Velocity vector of the particle</a></li><li><a href="#5">Acceleration vector of the particle</a></li></ul></div><h2 id="1">Define some value</h2><pre class="codeinput">clear;clc;close <span class="string">all</span>
+syms <span class="string">R</span> <span class="string">t</span> <span class="string">omega</span> <span class="string">OMEGA</span> <span class="string">alpha</span> <span class="string">beta</span> <span class="string">real</span>
+
+alpha = omega*t;                                                            <span class="comment">% position angle of link 1 with respect to the fix frame(Inertial frame)</span>
+beta = OMEGA*t;                                                             <span class="comment">% position angle of link 2 with respect to the relative frame of link 1</span>
+</pre><h2 id="2">Transformation matrices between different frame</h2><p><img src="HW1_eq14618478633242466745.png" alt="$$\left[\matrix{i \cr j \cr k}\right]=$$" style="width:43px;height:54px;"></p><p><a href="latex">latex</a> \begin{math} \begin{bmatrix}   i \\ j \\ k \end{bmatrix} \end{math} <a href="\latex">\latex</a></p><pre class="codeinput">F2R = [ cos(alpha)  sin(alpha)  0                                           <span class="comment">% from fix frame to ratation frame</span>
+       -sin(alpha)  cos(alpha)  0
+           0           0        1];
+R2F = inv(F2R);                                                             <span class="comment">% from rotation frame to fix frame</span>
+</pre><h2 id="3">Position vector of the particle</h2><pre class="codeinput">r_R = [R*cos(beta) 0 R*sin(beta)]';                                         <span class="comment">% in the rotating frame</span>
+r_I = simplify(R2F*r_R);                                                    <span class="comment">% in the fix frame</span>
+</pre><h2 id="4">Velocity vector of the particle</h2><pre class="codeinput">v_I = (diff(r_I,t));                                                        <span class="comment">% in the fix frame</span>
+v_R = simplify(F2R*v_I);                                                    <span class="comment">% in the rotating frame</span>
+
+fprintf(<span class="string">'v_x1 = %s \n'</span>,char(v_R(1)))
+fprintf(<span class="string">'v_y1 = %s \n'</span>,char(v_R(2)))
+fprintf(<span class="string">'v_z1 = %s \n'</span>,char(v_R(3)))
+fprintf(<span class="string">'\n'</span>)
+</pre><pre class="codeoutput">v_x1 = -OMEGA*R*sin(OMEGA*t) 
+v_y1 = R*omega*cos(OMEGA*t) 
+v_z1 = OMEGA*R*cos(OMEGA*t) 
+
+</pre><h2 id="5">Acceleration vector of the particle</h2><pre class="codeinput">a_I = diff(v_I,t);                                                          <span class="comment">% in the fix frame</span>
+a_R = simplify(F2R*a_I);                                                    <span class="comment">% in the rotating frame</span>
+
+fprintf(<span class="string">'a_x1 = %s \n'</span>,char(a_R(1)))
+fprintf(<span class="string">'a_y1 = %s \n'</span>,char(a_R(2)))
+fprintf(<span class="string">'a_z1 = %s \n'</span>,char(a_R(3)))
+fprintf(<span class="string">'\n'</span>)
+</pre><pre class="codeoutput">a_x1 = -R*cos(OMEGA*t)*(OMEGA^2 + omega^2) 
+a_y1 = -2*OMEGA*R*omega*sin(OMEGA*t) 
+a_z1 = -OMEGA^2*R*sin(OMEGA*t) 
+
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Advanced Dynamics HW.1
+% Programer: PO-HSUN WU
+% Last edit date: 2021/10/17 ??:??
+
+%% Define some value
+clear;clc;close all
+syms R t omega OMEGA alpha beta real
+
+alpha = omega*t;                                                            % position angle of link 1 with respect to the fix frame(Inertial frame)
+beta = OMEGA*t;                                                             % position angle of link 2 with respect to the relative frame of link 1
+
+%% Transformation matrices between different frame
+%
+% 
+% $$\left[\matrix{i \cr j \cr k}\right]=$$
+% 
+% <latex>
+% \begin{math}
+% \begin{bmatrix}
+%   i \\ j \\ k
+% \end{bmatrix}
+% \end{math}
+% <\latex>
+%
+F2R = [ cos(alpha)  sin(alpha)  0                                           % from fix frame to ratation frame
+       -sin(alpha)  cos(alpha)  0
+           0           0        1];
+R2F = inv(F2R);                                                             % from rotation frame to fix frame
+
+%% Position vector of the particle
+r_R = [R*cos(beta) 0 R*sin(beta)]';                                         % in the rotating frame
+r_I = simplify(R2F*r_R);                                                    % in the fix frame
+
+%% Velocity vector of the particle
+v_I = (diff(r_I,t));                                                        % in the fix frame
+v_R = simplify(F2R*v_I);                                                    % in the rotating frame
+
+fprintf('v_x1 = %s \n',char(v_R(1)))
+fprintf('v_y1 = %s \n',char(v_R(2)))
+fprintf('v_z1 = %s \n',char(v_R(3)))
+fprintf('\n')
+
+%% Acceleration vector of the particle
+a_I = diff(v_I,t);                                                          % in the fix frame
+a_R = simplify(F2R*a_I);                                                    % in the rotating frame
+
+fprintf('a_x1 = %s \n',char(a_R(1)))
+fprintf('a_y1 = %s \n',char(a_R(2)))
+fprintf('a_z1 = %s \n',char(a_R(3)))
+fprintf('\n')
+##### SOURCE END #####
+--></body></html>

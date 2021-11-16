@@ -1,0 +1,42 @@
+
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and republish this document.
+
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{color}
+
+\sloppy
+\definecolor{lightgray}{gray}{0.5}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+
+    \begin{verbatim}
+clear;clc;close all
+
+mean_anomly = deg2rad(30);
+pericenter = 500+6378;
+apocenter = 36000+6378;
+a = (apocenter+pericenter)/2;
+c = a-pericenter;
+e = c/a;
+
+syms E
+eqn = mean_anomly == E-e*sin(E);
+E = solve(eqn);
+
+ture_anomaly = vpa(atan2(sqrt(1-e^2)*sin(E), cos(E)-e)*180/pi())
+\end{verbatim}
+
+        \color{lightgray} \begin{verbatim}ture_anomaly =
+
+118.67419857661321426980468377812
+
+\end{verbatim} \color{black}
+
+
+
+\end{document}
+

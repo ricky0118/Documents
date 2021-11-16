@@ -1,0 +1,266 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Advanced Dynamics HW.3</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-10-31"><meta name="DC.source" content="HW3.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Advanced Dynamics HW.3</h1><!--introduction--><p>Programer: PO-HSUN WU Last edit date: 2021/10/31 19:30</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Formula of motion</a></li><li><a href="#2">Calculate the values of the motion</a></li><li><a href="#3">Animate of the motion</a></li></ul></div><h2 id="1">Formula of motion</h2><pre class="codeinput">clear;clc;close <span class="string">all</span>
+syms <span class="string">t</span> <span class="string">r</span> <span class="string">theta</span> <span class="string">omega</span> <span class="string">real</span>
+theta = omega*t;
+r_C = [r*theta r];
+r_Cp = [r*theta 0];
+r_Cpp = [r*theta 2*r];
+r_M = [r*(theta-sin(theta)) r*(1-cos(theta))];
+r_CpM = simplify(r_M-r_Cp);
+r_CppM = simplify(r_M-r_Cpp);
+
+v_Cp = simplify(diff(r_Cp, t));
+v_M = simplify(diff(r_M, t));
+mag_v_M = simplify(sqrt(v_M(1)^2+v_M(2)^2));
+
+DotProduct_r_CpM_v = simplify(dot(r_CpM, v_M));
+DotProduct_r_CppM_v = simplify(dot(r_CpM, r_CppM));
+fprintf(<span class="string">"The dot product between rCpM and v is %s. And it's orthogonal!!! \n"</span>, char(DotProduct_r_CpM_v))
+fprintf(<span class="string">"The dot product between rCppM and v is %s. And it's orthogonal too!!! \n"</span>, char(DotProduct_r_CppM_v))
+
+a_M = diff(v_M,t);
+</pre><pre class="codeoutput">The dot product between rCpM and v is 0. And it's orthogonal!!! 
+The dot product between rCppM and v is 0. And it's orthogonal too!!! 
+</pre><h2 id="2">Calculate the values of the motion</h2><p>Setup some condition</p><pre class="codeinput">tn = 0:0.01:10;
+rn = .5;
+omegan = 1;
+parameters = {tn, rn, omegan};
+
+<span class="comment">% Substitute the condition values to the equation of motion</span>
+position_M = double(subs(r_M', {t, r, omega}, parameters));
+position_C = double(subs(r_C', {t, r, omega}, parameters));
+position_Cp = double(subs(r_Cp', {t, r, omega}, parameters));
+position_Cpp = double(subs(r_Cpp', {t, r, omega}, parameters));
+velocity_M = double(subs(v_M', {t, r, omega}, parameters));
+Acceleration_M = double(subs(a_M', {t, r, omega}, parameters));
+</pre><h2 id="3">Animate of the motion</h2><p>Set of the figure config: {Show reference, Focus on moving frame, Title of the plot, Set of legend name}</p><pre class="codeinput">FigureConfig = {{true, true, <span class="string">'The trajectory of point M focus on the moving frame'</span>},
+                {false, false, <span class="string">'The trajectory of point M focus on the fix frame'</span>}};
+<span class="comment">% Change the animate play speed</span>
+AnimateSpeed = 50;
+tspan = 1:AnimateSpeed:length(tn);
+
+
+<span class="keyword">for</span> frame = 1:length(FigureConfig)
+    figure()
+    <span class="keyword">for</span> i = tspan
+        <span class="comment">% Find out the values until the current time</span>
+        EndPosition_M = position_M(:,i);
+        EndPosition_C = position_C(:,i);
+        EndPosition_Cp = position_Cp(:,i);
+        EndPosition_Cpp = position_Cpp(:,i);
+        EndVelocityVector_M = velocity_M(:,i);
+        EndAccVector_M = Acceleration_M(:,i);
+
+        <span class="comment">% Reset the current figure</span>
+        clf
+
+        <span class="comment">% Plot out the figure</span>
+        hold <span class="string">on</span>; daspect([1 1 1])
+        plot(position_M(1,1:i), position_M(2,1:i), <span class="string">'LineWidth'</span>, 1.5)                            <span class="comment">% Plot the trajectory</span>
+        viscircles(EndPosition_C', rn, <span class="string">'LineWidth'</span>, 1, <span class="string">'Color'</span>, <span class="string">'k'</span>);                           <span class="comment">% Plot the circle</span>
+        quiver(EndPosition_M(1), EndPosition_M(2), EndVelocityVector_M(1), EndVelocityVector_M(2), <span class="keyword">...</span>
+            <span class="string">'LineWidth'</span>, 1.5, <span class="string">'Color'</span>, <span class="string">'r'</span>, <span class="string">'MaxHeadSize'</span>, 0.5);                                <span class="comment">% Draw the velocity vector of point M</span>
+        quiver(EndPosition_M(1), EndPosition_M(2), EndAccVector_M(1), EndAccVector_M(2), <span class="keyword">...</span>
+            <span class="string">'LineWidth'</span>, 1.5, <span class="string">'Color'</span>, <span class="string">'g'</span>, <span class="string">'MaxHeadSize'</span>, 0.5);                                <span class="comment">% Draw the acceleration of point M</span>
+
+        <span class="keyword">if</span> FigureConfig{frame}{1} == true
+            Vector_CpM = {[position_M(1,i) position_Cp(1,i)], [position_M(2,i) position_Cp(2,i)]};
+            plot(Vector_CpM{1}, Vector_CpM{2}, <span class="string">'--'</span>, <span class="string">'LineWidth'</span>, 1.5, <span class="string">'Color'</span>, <span class="string">'c'</span>)
+            Vector_CppM = {[position_M(1,i) position_Cpp(1,i)], [position_M(2,i) position_Cpp(2,i)]};
+            plot(Vector_CppM{1}, Vector_CppM{2}, <span class="string">'--'</span>, <span class="string">'LineWidth'</span>, 1.5, <span class="string">'Color'</span>, <span class="string">'m'</span>)
+        <span class="keyword">end</span>
+
+        plot(position_M(1,i), position_M(2,i), <span class="string">'.'</span>, <span class="string">'Color'</span>, <span class="string">'b'</span>, <span class="string">'MarkerSize'</span>, 15)             <span class="comment">% Draw the point M</span>
+        plot(position_C(1,i), position_C(2,i), <span class="string">'.'</span>, <span class="string">'Color'</span>, <span class="string">'k'</span>, <span class="string">'MarkerSize'</span>, 5)              <span class="comment">% Draw the point C</span>
+
+        title(FigureConfig{frame}{3})
+        <span class="keyword">if</span> FigureConfig{frame}{1} == true
+            legend(<span class="string">'Trajectory'</span>, <span class="string">'Velocity'</span>, <span class="string">'Acceleration'</span>, <span class="string">"$\overline{C'M}$"</span>, <span class="string">"$\overline{C''M}$"</span>, <span class="string">'Point M'</span>, <span class="string">'Point C'</span>, <span class="string">'Interpreter'</span>, <span class="string">'latex'</span>)
+        <span class="keyword">else</span>
+            legend(<span class="string">'Trajectory'</span>, <span class="string">'Velocity'</span>, <span class="string">'Acceleration'</span>, <span class="string">'Point M'</span>, <span class="string">'Point C'</span>, <span class="string">'Interpreter'</span>, <span class="string">'latex'</span>)
+        <span class="keyword">end</span>
+        xlabel(<span class="string">'x'</span>); ylabel(<span class="string">'y'</span>)
+        <span class="keyword">if</span> FigureConfig{frame}{2} == true
+            xlim([position_C(1,i)-1 position_C(1,i)+3])                                         <span class="comment">% Focus on the point C</span>
+            ylim([-0.5 2])
+        <span class="keyword">else</span>
+            xlim([-1 7])
+            ylim([-1 4])
+        <span class="keyword">end</span>
+        grid()
+        drawnow
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre><img vspace="5" hspace="5" src="HW3_01.png" alt=""> <img vspace="5" hspace="5" src="HW3_02.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Advanced Dynamics HW.3
+% Programer: PO-HSUN WU
+% Last edit date: 2021/10/31 19:30
+
+%% Formula of motion
+clear;clc;close all
+syms t r theta omega real
+theta = omega*t;
+r_C = [r*theta r];
+r_Cp = [r*theta 0];
+r_Cpp = [r*theta 2*r];
+r_M = [r*(theta-sin(theta)) r*(1-cos(theta))];
+r_CpM = simplify(r_M-r_Cp);
+r_CppM = simplify(r_M-r_Cpp);
+
+v_Cp = simplify(diff(r_Cp, t));
+v_M = simplify(diff(r_M, t));
+mag_v_M = simplify(sqrt(v_M(1)^2+v_M(2)^2));
+
+DotProduct_r_CpM_v = simplify(dot(r_CpM, v_M));
+DotProduct_r_CppM_v = simplify(dot(r_CpM, r_CppM));
+fprintf("The dot product between rCpM and v is %s. And it's orthogonal!!! \n", char(DotProduct_r_CpM_v))
+fprintf("The dot product between rCppM and v is %s. And it's orthogonal too!!! \n", char(DotProduct_r_CppM_v))
+
+a_M = diff(v_M,t);
+
+%% Calculate the values of the motion
+% Setup some condition
+tn = 0:0.01:10;
+rn = .5;
+omegan = 1;
+parameters = {tn, rn, omegan};
+
+% Substitute the condition values to the equation of motion
+position_M = double(subs(r_M', {t, r, omega}, parameters));
+position_C = double(subs(r_C', {t, r, omega}, parameters));
+position_Cp = double(subs(r_Cp', {t, r, omega}, parameters));
+position_Cpp = double(subs(r_Cpp', {t, r, omega}, parameters));
+velocity_M = double(subs(v_M', {t, r, omega}, parameters));
+Acceleration_M = double(subs(a_M', {t, r, omega}, parameters));
+
+%% Animate of the motion
+% Set of the figure config: {Show reference, Focus on moving frame, Title of the plot, Set of legend name}
+FigureConfig = {{true, true, 'The trajectory of point M focus on the moving frame'},
+                {false, false, 'The trajectory of point M focus on the fix frame'}};
+% Change the animate play speed
+AnimateSpeed = 50;
+tspan = 1:AnimateSpeed:length(tn);
+
+
+for frame = 1:length(FigureConfig)
+    figure()
+    for i = tspan
+        % Find out the values until the current time
+        EndPosition_M = position_M(:,i);
+        EndPosition_C = position_C(:,i);
+        EndPosition_Cp = position_Cp(:,i);
+        EndPosition_Cpp = position_Cpp(:,i);
+        EndVelocityVector_M = velocity_M(:,i);
+        EndAccVector_M = Acceleration_M(:,i);
+
+        % Reset the current figure
+        clf
+        
+        % Plot out the figure
+        hold on; daspect([1 1 1])
+        plot(position_M(1,1:i), position_M(2,1:i), 'LineWidth', 1.5)                            % Plot the trajectory
+        viscircles(EndPosition_C', rn, 'LineWidth', 1, 'Color', 'k');                           % Plot the circle
+        quiver(EndPosition_M(1), EndPosition_M(2), EndVelocityVector_M(1), EndVelocityVector_M(2), ...
+            'LineWidth', 1.5, 'Color', 'r', 'MaxHeadSize', 0.5);                                % Draw the velocity vector of point M
+        quiver(EndPosition_M(1), EndPosition_M(2), EndAccVector_M(1), EndAccVector_M(2), ...
+            'LineWidth', 1.5, 'Color', 'g', 'MaxHeadSize', 0.5);                                % Draw the acceleration of point M
+
+        if FigureConfig{frame}{1} == true
+            Vector_CpM = {[position_M(1,i) position_Cp(1,i)], [position_M(2,i) position_Cp(2,i)]};
+            plot(Vector_CpM{1}, Vector_CpM{2}, 'REPLACE_WITH_DASH_DASH', 'LineWidth', 1.5, 'Color', 'c')
+            Vector_CppM = {[position_M(1,i) position_Cpp(1,i)], [position_M(2,i) position_Cpp(2,i)]};
+            plot(Vector_CppM{1}, Vector_CppM{2}, 'REPLACE_WITH_DASH_DASH', 'LineWidth', 1.5, 'Color', 'm')
+        end
+
+        plot(position_M(1,i), position_M(2,i), '.', 'Color', 'b', 'MarkerSize', 15)             % Draw the point M
+        plot(position_C(1,i), position_C(2,i), '.', 'Color', 'k', 'MarkerSize', 5)              % Draw the point C
+
+        title(FigureConfig{frame}{3})
+        if FigureConfig{frame}{1} == true
+            legend('Trajectory', 'Velocity', 'Acceleration', "$\overline{C'M}$", "$\overline{C''M}$", 'Point M', 'Point C', 'Interpreter', 'latex')
+        else
+            legend('Trajectory', 'Velocity', 'Acceleration', 'Point M', 'Point C', 'Interpreter', 'latex')
+        end
+        xlabel('x'); ylabel('y')
+        if FigureConfig{frame}{2} == true
+            xlim([position_C(1,i)-1 position_C(1,i)+3])                                         % Focus on the point C
+            ylim([-0.5 2])
+        else
+            xlim([-1 7])
+            ylim([-1 4])
+        end
+        grid()
+        drawnow
+    end
+end
+##### SOURCE END #####
+--></body></html>

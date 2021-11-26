@@ -18,6 +18,9 @@
 碩士/Notes/.trash/
 碩士/Notes/.DS_Store
 
+# Matlab autosave file
+*.asv
+
 # Latex log file
 *.log
 *.aux

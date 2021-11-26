@@ -1,0 +1,22 @@
+%% Advanced Dynamics Midterm
+% Programer: PO-HSUN WU
+% Last edit date: 2021/11/17 16:26
+
+%% 
+clear;clc;close all
+syms t 
+a = 3*sqrt(2);
+b = 6
+n = 100/60;
+phi = acos(b/2/a);
+theta = n*t;
+
+OP = ((2+cos(pi*t))/sqrt(2))*[1; sin(theta); cos(theta)];
+v_OP = simplify(diff(OP,t));
+a_OP = simplify(diff(v_OP,t));
+
+mag_v = sqrt(v_OP(1)^2 + v_OP(2)^2 + v_OP(3)^2);
+mag_a = sqrt(a_OP(1)^2 + a_OP(2)^2 + a_OP(3)^2);
+
+t_max = solve(mag_a==0, t);
+subs(mag_v, t, t_max)

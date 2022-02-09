@@ -17,7 +17,7 @@ Machine Learning is a function of ==**Looking for a [[#Some types of Functions| 
 
 ### 3. Structured Learning:
 
-- Output object with structure.
+- Output object with a structure like an image, document, sound...etc.
 
 # The step of Learning
 

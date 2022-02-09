@@ -13,7 +13,7 @@
 
 ^ReinforcementLearning
 
-***Reinforcement Learning (RL)*** is a machine learning paradigm in which an agent ==interacts with its environment== in order to learn a task over time.
+***Reinforcement Learning (RL)*** is a [[Machine Learning| machine learning]] paradigm in which an agent ==interacts with its environment== in order to learn a task over time.
 ## Framework
 
 ^framework

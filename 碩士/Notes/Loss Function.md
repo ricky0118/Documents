@@ -4,11 +4,13 @@ The loss function is a function of parameters. The output of the loss function i
 
 ## For example
 
-$L(0.5, 1)$ is the error between the model $y = 0.5+1x_1$ and the current true value(Label).
+$L(1, 500)$ is the error between the model $y = 1x_1 + 500$ and the current true value(Label).
+
+---
 
 # Loss
 
-Loss is the average of the errors. It's can determine the accuracy of the model. If the loss is smaller then the model will be more accurate.
+Loss is ==the average of the errors==. It's can determine the accuracy of the model. If the loss is smaller then the model will be more accurate.
 
 ## Several methods to calculate the error
 

@@ -1,0 +1,54 @@
+/* Source font setup */
+@font-face{
+	font-family: font-source;
+	src: local('微軟正黑體'), local('Microsoft JhengHei');
+	unicode-range: U+4E00-9FFF;
+}
+
+@font-face{
+	font-family: font-source;
+	src: local('Consolas');
+	unicode-range: U+00-024F;
+}
+
+.markdown-source-view{
+  font-family: font-source !important;
+  font-size: 18px;
+}
+
+/* Preview font setup */
+@font-face{
+	font-family: font-preview;
+	src: local('標楷體'), local('DFKai-SB');
+	unicode-range: U+4E00-9FFF;
+}
+
+@font-face{
+	font-family: font-preview;
+	src: local('Consolas');
+	unicode-range: U+00-024F;
+}
+
+.markdown-preview-view{
+  font-family: font-preview !important;
+  font-size: 18px;
+}
+
+p{
+	text-indent: 2em;
+}
+
+.markdown-preview-view .internal-link.is-unresolved{
+	opacity: 1;
+}
+
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover{
+	color: inherit !important;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a{
+	color: inherit !important;
+}
+
+
+

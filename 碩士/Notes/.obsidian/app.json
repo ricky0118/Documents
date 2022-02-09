@@ -1,0 +1,24 @@
+{
+  "strictLineBreaks": false,
+  "showFrontmatter": false,
+  "foldIndent": true,
+  "foldHeading": true,
+  "showLineNumber": true,
+  "vimMode": false,
+  "spellcheck": true,
+  "spellcheckDictionary": [
+    "Cyber",
+    "cyber",
+    "hyperparameter",
+    "Adaptiveness"
+  ],
+  "pdfExportSettings": {
+    "pageSize": "A4",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 100
+  },
+  "readableLineLength": true,
+  "smartIndentList": true,
+  "defaultViewMode": "preview"
+}

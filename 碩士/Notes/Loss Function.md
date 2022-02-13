@@ -4,7 +4,7 @@ The loss function is a function of parameters. The output of the loss function i
 
 ## For example
 
-$L(1, 500)$ is the error between the model $y = 1x_1 + 500$ and the current true value(Label).
+$L(1, 500)$ is the error between the linear model $y = 1x_1 + 500$ and the current true value(Label).
 
 ---
 

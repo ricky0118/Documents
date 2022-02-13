@@ -10,7 +10,9 @@
     "Cyber",
     "cyber",
     "hyperparameter",
-    "Adaptiveness"
+    "Adaptiveness",
+    "Sigmoid",
+    "sigmoid"
   ],
   "pdfExportSettings": {
     "pageSize": "A4",

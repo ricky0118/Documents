@@ -4,24 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "8a0a4932363eebad",
+        "id": "972a56ae15626a43",
         "type": "leaf",
-        "pinned": true,
         "state": {
           "type": "graph",
-          "state": {},
-          "pinned": true
-        }
-      },
-      {
-        "id": "aa78a5554f47f5c2",
-        "type": "leaf",
-        "state": {
-          "type": "markdown",
-          "state": {
-            "file": "Optimization.md",
-            "mode": "preview"
-          }
+          "state": {}
         }
       }
     ],
@@ -49,7 +36,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#bias",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -80,43 +67,8 @@
       {
         "id": "687ebcd1312c28e3",
         "type": "tabs",
-        "dimension": 61.60714285714286,
+        "dimension": 44.230769230769226,
         "children": [
-          {
-            "id": "83538175d9e8851e",
-            "type": "leaf",
-            "state": {
-              "type": "localgraph",
-              "state": {
-                "file": "Optimization.md",
-                "options": {
-                  "collapse-filter": false,
-                  "search": "",
-                  "localJumps": 1,
-                  "localBacklinks": true,
-                  "localForelinks": true,
-                  "localInterlinks": true,
-                  "showTags": true,
-                  "showAttachments": false,
-                  "hideUnresolved": false,
-                  "collapse-color-groups": true,
-                  "colorGroups": [],
-                  "collapse-display": false,
-                  "showArrow": true,
-                  "textFadeMultiplier": -3,
-                  "nodeSizeMultiplier": 0.812977528089888,
-                  "lineSizeMultiplier": 3.02324786324786,
-                  "collapse-forces": false,
-                  "centerStrength": 0.497058823529412,
-                  "repelStrength": 10,
-                  "linkStrength": 1,
-                  "linkDistance": 199,
-                  "scale": 0.7761451769739345,
-                  "close": true
-                }
-              }
-            }
-          },
           {
             "id": "3935f342cb5c5638",
             "type": "leaf",
@@ -127,13 +79,56 @@
                 "useHierarchy": true
               }
             }
+          },
+          {
+            "id": "83538175d9e8851e",
+            "type": "leaf",
+            "state": {
+              "type": "localgraph",
+              "state": {
+                "options": {
+                  "collapse-filter": true,
+                  "search": "",
+                  "localJumps": 5,
+                  "localBacklinks": true,
+                  "localForelinks": true,
+                  "localInterlinks": true,
+                  "showTags": true,
+                  "showAttachments": false,
+                  "hideUnresolved": false,
+                  "collapse-color-groups": true,
+                  "colorGroups": [],
+                  "collapse-display": true,
+                  "showArrow": true,
+                  "textFadeMultiplier": -3,
+                  "nodeSizeMultiplier": 0.812977528089888,
+                  "lineSizeMultiplier": 3.02324786324786,
+                  "collapse-forces": true,
+                  "centerStrength": 0.903823529411765,
+                  "repelStrength": 20,
+                  "linkStrength": 0.301470588235294,
+                  "linkDistance": 30,
+                  "scale": 0.5277735182157299,
+                  "close": true
+                }
+              }
+            }
+          },
+          {
+            "id": "1afe053ec8f82f15",
+            "type": "leaf",
+            "state": {
+              "type": "mindmap",
+              "state": {}
+            }
           }
-        ]
+        ],
+        "currentTab": 2
       },
       {
         "id": "dd35093f006f53b2",
         "type": "tabs",
-        "dimension": 38.392857142857146,
+        "dimension": 55.769230769230774,
         "children": [
           {
             "id": "06c877e6019fe1c8",
@@ -141,7 +136,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Optimization.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -151,24 +145,36 @@
                 "unlinkedCollapsed": false
               }
             }
+          },
+          {
+            "id": "8a0a4932363eebad",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "graph",
+              "state": {},
+              "pinned": true
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 400.5
+    "width": 400.5,
+    "collapsed": true
   },
-  "active": "aa78a5554f47f5c2",
+  "active": "972a56ae15626a43",
   "lastOpenFiles": [
-    "Optimization.md",
-    "Training.md",
-    "Machine Learning.md",
-    "Reinforcement Learning.md",
-    "Loss Function.md",
-    "HyperParameters.md",
     "Model.md",
-    "HyperPatameters.md",
-    "Some types of Functions.md",
-    "Reward system.md"
+    "Training(RL).md",
+    "Machine Learning.md",
+    "Neural Network.md",
+    "Activation function.md",
+    "Reinforcement Learning.md",
+    "HyperParameters.md",
+    "Training.md",
+    "Optimization.md",
+    "Loss Function.md"
   ]
 }

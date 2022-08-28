@@ -1,0 +1,67 @@
+\documentclass{beamer}
+%%% ========== Package setup ==========
+\usepackage{xeCJK}      % Chinese words package
+\usepackage{fontspec}   % Word fonts package
+\usepackage{listings}   % Wrap Figure or table package
+\usepackage{wrapfig}    % Multicolumn package
+\usepackage{multicol}   % Multicolumn package
+\usepackage{pdflscape}  % Landscpae package
+\usepackage{tikz}       % TikZ picture package(Docs: https://ftp.ntou.edu.tw/ctan/graphics/pgf/base/doc/pgfmanual.pdf)
+\usepackage[outline]{contour} % glow around text
+\usepackage{amsmath}
+\usepackage{mathtools}
+
+%%% ========== Slide setting ==========
+%% Slide theme setup
+\usetheme{CambridgeUS}
+\usecolortheme{wolverine}
+
+%% Setup chinese words encoder
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+%% More word fonts
+\setmainfont{Times New Roman}
+\renewcommand{\familydefault}{\rmdefault}
+\setCJKmainfont{標楷體}
+
+% Setting for figure and table numbering
+\setbeamertemplate{caption}[numbered]
+
+% TikZ setting
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+
+%%% ========== Title setup ==========
+\date{August 22, 2022}
+\title{Meeting}
+\author{Po Hsun Wu}
+
+%%% ========== Document ==========
+\begin{document}
+    \maketitle
+
+    \section{Progress report}
+    \begin{frame}
+        \frametitle{\secname}
+
+        \begin{itemize}
+            \item Changing the reward function
+            $$r(t) = -x^TQx$$
+            \item Building the XPlane environment for RL.
+        \end{itemize}
+    \end{frame}
+
+    \section{Future}
+    \begin{frame}
+        \frametitle{\secname}
+
+        \begin{itemize}
+            \item Change the stop criteria to fix times.
+            \item Try to train the controller for aircraft.
+        \end{itemize}
+
+    \end{frame}
+
+\end{document}

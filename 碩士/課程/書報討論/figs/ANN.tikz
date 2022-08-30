@@ -1,0 +1,62 @@
+%%% ==================== Artificial Neuro Network ====================
+% The figure of Artificial Neuro Network architecture.
+% Author: Izaak Neutelings
+% Date: September 2021
+% Reference: https://tikz.net/neural_networks/
+%
+\colorlet{myred}{red!80!black}
+\colorlet{myblue}{blue!80!black}
+\colorlet{mygreen}{green!60!black}
+\colorlet{myorange}{orange!70!red!60!black}
+\colorlet{mydarkred}{red!30!black}
+\colorlet{mydarkblue}{blue!40!black}
+\colorlet{mydarkgreen}{green!30!black}
+
+\tikzstyle{node}=[thick,circle,draw=myblue,minimum size=22,inner sep=0.5,outer sep=0.6]
+\tikzstyle{node in}=[node,green!20!black,draw=mygreen!30!black,fill=mygreen!25]
+\tikzstyle{node hidden}=[node,blue!20!black,draw=myblue!30!black,fill=myblue!20]
+\tikzstyle{connect}=[->, >={latex}, thick,mydarkblue] %,line cap=round
+
+
+\begin{tikzpicture}[x=2.7cm,y=1.6cm]
+    \message{^^JNeural network activation}
+    \def\NI{5} % number of nodes in input layers
+    \def\NO{4} % number of nodes in output layers
+    \def\yshift{0.4} % shift last node for dots
+
+    % INPUT LAYER
+    \foreach \i [evaluate={\c=int(\i==\NI); \y=\NI/2-\i-\c*\yshift; \index=(\i<\NI?int(\i):"n");}] in {1,...,\NI}{ % loop over nodes
+        \node[node in,outer sep=0.6] (NI-\i) at (0,\y) {$a_{\index}^{(0)}$};
+    }
+
+    % OUTPUT LAYER
+    \foreach \i [evaluate={\c=int(\i==\NO); \y=\NO/2-\i-\c*\yshift; \index=(\i<\NO?int(\i):"m");}] in {\NO,...,1}{ % loop over nodes
+        \ifnum\i=1 % high-lighted node
+            \node[node hidden] (NO-\i) at (1,\y) {$\Sigma$};
+            \node[node hidden] (NO-\i_active) at (1.5,\y) {$\sigma$};
+            \node[node hidden] (NO-\i_output) at (2,\y) {$a_{\index}^{(1)}$};
+            \foreach \j [evaluate={\index=(\j<\NI?int(\j):"n");}] in {1,...,\NI}{ % loop over nodes in previous layer
+                \draw[connect,white,line width=1.2] (NI-\j) -- (NO-\i);
+                \draw[connect] (NI-\j) -- (NO-\i)
+                node[pos=0.50] {\contour{white}{$w_{1,\index}$}};
+            }
+            \draw[connect] (NO-\i) -- (NO-\i_active);
+            \draw[connect] (NO-\i_active) -- (NO-\i_output);
+        \else % other light-colored nodes
+            \node[node,blue!20!black!80,draw=myblue!20,fill=myblue!5] (NO-\i) at (1,\y) {$\Sigma$};
+            \node[node,blue!20!black!80,draw=myblue!20,fill=myblue!5] (NO-\i_active) at (1.5,\y) {$\sigma$};
+            \node[node,blue!20!black!80,draw=myblue!20,fill=myblue!5] (NO-\i_output) at (2,\y) {$a_{\index}^{(1)}$};
+            \foreach \j in {1,...,\NI}{ % loop over nodes in previous layer
+                \draw[connect,myblue!20] (NI-\j) -- (NO-\i);
+            }
+            \draw[connect,myblue!20] (NO-\i) -- (NO-\i_active);
+            \draw[connect,myblue!20] (NO-\i_active) -- (NO-\i_output);
+        \fi
+    }
+
+    % DOTS
+    \path (NI-\NI) --++ (0,0.9+\yshift) node[midway,scale=1.2] {$\vdots$};
+    \path (NO-\NO) --++ (0,0.9+\yshift) node[midway,scale=1.2] {$\vdots$};
+    \path (NO-\NO_active) --++ (0,0.9+\yshift) node[midway,scale=1.2] {$\vdots$};
+    \path (NO-\NO_output) --++ (0,0.9+\yshift) node[midway,scale=1.2] {$\vdots$};
+\end{tikzpicture}

@@ -1,0 +1,818 @@
+\documentclass[a4paper, onecolumn, 11pt]{article}
+\setlength{\topmargin}{-1.0cm}
+\setlength{\headheight}{0.8cm}\setlength{\headsep}{0.5cm}
+\setlength{\textwidth}{17cm} \setlength{\textheight}{24.5cm}
+\setlength{\oddsidemargin}{-0.5cm} \setlength{\columnsep}{0.7cm}
+\setlength{\footskip}{0.5cm}
+%\renewcommand{\baselinestretch}{2} % double-space format
+\usepackage{fontspec}   %加這個就可以設定字體
+\usepackage{xeCJK}       %讓中英文字體分開設置
+\xeCJKsetup{AutoFakeBold=3.5, AutoFakeSlant=false}
+\setCJKmainfont{標楷體} %設定中文為系統上的字型，而英文不去更動，使用原TeX字型
+\setmainfont{Times New Roman} % 英文則使用Times New Roman字型
+\XeTeXlinebreaklocale "zh"             %這兩行一定要加，中文才能自動換行
+\XeTeXlinebreakskip = 0pt plus 1pt     %這兩行一定要加，中文才能自動換行
+\usepackage{times}
+\usepackage{color}  %{\color{red}要改的文字}
+\usepackage{graphicx} %插入圖片
+\usepackage{float} %圖片及表格定位用, [H]
+\usepackage{caption}
+\usepackage{amsfonts}
+\usepackage[md,small]{titlesec}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{hyperref}    %二選一，超連結使用顏色框
+%\usepackage[colorlinks,
+%            linkcolor=black,
+%            anchorcolor=black,
+%            citecolor=black,
+%            urlcolor=black
+%            ]{hyperref}   %二選一，，超連結不使用顏色框
+
+
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{hypernat}
+\usepackage{colortbl}
+\usepackage{wallpaper}
+\usepackage{bm}
+\usepackage{amssymb} % 使用"\triangleq"符號
+%\linespread{1.8}
+\usepackage{pifont} %六芒星圖案"\ding{65}"，不能使用數學模式!
+\usepackage{hhline} %改變表格線條形式
+\usepackage[final]{pdfpages} % 插入摘要.pdf
+\usepackage{diagbox}
+\renewcommand\tablename{表}
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}} %表格內換行指令
+\renewcommand\figurename{圖}
+%\usepackage{ctexcap}
+%\CTEXsetup[format={\Large\bfseries}]{section}
+%\CTEXsetup[number={\chinese{section}}]{section}
+
+\usepackage{xCJKnumb}
+%\titleformat{\subsection}{\normalsize}{\arabic{section}.\arabic{subsection}}{1ex}{}
+\titleformat{\section}{\centering\bfseries\large}{\xCJKnumber{\thesection}\,、}{0em}{}
+
+\renewcommand\refname{參考文獻}
+\makeatletter
+\newenvironment{figurehere}
+  {\def\@captype{figure}}
+  {}
+\newenvironment{tablehere}
+  {\def\@captype{table}}
+  {}
+\makeatother
+\newcounter{sectn}
+%Define head and foot
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand{\pp}{\small{\thepage}}
+\newcommand{\hc}{}
+\renewcommand{\headrulewidth}{0pt}
+\lhead[\hc]{\hc} \chead[]{} \rhead[]{} \lfoot[]{}\cfoot[\pp]{\pp}
+\rfoot[]{}
+
+\renewcommand*{\thepage}{\large\arabic{page}}
+\newtheorem{thm}{Theorem}
+
+\begin{document}
+\setcounter{page}{1}
+%\addtocounter{page}{0}
+\author{\large{廖晉揚 $^{a}$, 蕭富元$^{b}$}%\footnote{First Author,Email: binson7041@gmail.com}}
+\ \\
+$^{a,\ b}$淡江大學航空太空工程學系\\
+\\
+\large{ Liao, Chin-Yang$^{a}$, Hsiao, Fu-Yuen$^{b}$}\\
+$^{a,\ b}$Department of Aerospace Engineering, Tamkung University}
+
+\title{\Large{最佳化無人機順滑模態控制\\
+\ \\
+Optimal Sliding Mode Controller for Unmanned Aerial Vehicles
+}}
+\date{}
+
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{empty}  %取消頁碼
+\thispagestyle{empty} %取消頁碼
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\thispagestyle{empty} \lhead[\hc]{\hc} \chead[]{} \rhead[]{}
+\lfoot[]{} \cfoot[\pp]{\pp} \rfoot[]{}
+\renewcommand\abstractname{摘要}
+%\CenterWallPaper{0.35}{watermark_tku.pdf} %浮水印
+\begin{abstract} \normalsize{  }
+本研究採用順滑模態控制(sliding mode control)來實現無人機自主飛行，並利用線性二次調節器(linear–quadratic regulator)進行控制器最佳化設計，再使用Matlab和Matlab Simulink進行數值驗證。飛行載具部分選擇市面上販售之skysurfer，其輕巧之優點利於成為自動控制之驗證平台。硬體部分選用Pixhawk 1作為機載電腦來進行實際飛行驗證。\\
+\hspace{0mm}\\
+\textbf{ 關鍵字:}無人飛行載具、順滑模態控制、線性二次調節器、Matlab/Simulink
+\end{abstract}
+\ \\
+%\vspace{-0.5cm}
+%\renewcommand\abstractname{Abstract}
+%\begin{abstract} \normalsize{
+%    The main purpose of this paper is using sliding mode control and linear–quadratic regulator to design the controller for unmanned aerial vehicle. I Choose Skysurfer to test automatic flight because of its light weight.After finishing numerical simulation, I use Pixhawk 1 to verfy the controller and do test flight.   \\
+%\hspace{0mm}\\
+%\textbf{ KEYWORDS:} Unmanned aerial vehicles, sliding %mode control、linear–quadratic regulator 、Matlab/%Simulink}
+%\end{abstract}
+%\vspace{-0.5cm}
+%\newpage
+\begin{multicols}{2}[]
+\section{緒論}
+\subsection{背景與研究動機}
+\hspace{8mm}
+為了應付複雜之天氣型態，加上順滑模態控制在近年來越趨熱門，國內其他知名大學也朝著方向研究，因此採用順滑模態控制來實現無人機自主飛行。
+\par 另一方面，本研究使用之飛行載具為市面上販售之skysurfer，有著易於操作、利於維修以及體積小之優點，方便成為自動控制之驗證平台和實際試飛，這是本研究選擇使用skysurfer作為研究平台原因。
+\par 本研究選擇使用之飛控板為Pixhawk 1，能應付短時間大量的數據計算，如進行複雜之矩陣運算，最後總合成本考量和對飛控板要求，選擇Pixhawk 1為本研究之機載電腦。
+\par 總合上述幾點決定研究之方向，並且運用順滑模態控制器配和Pixhawk 1飛控板實際驗證，達成自主飛行之目的。
+\subsection{文獻回顧}
+\hspace{8mm}在研究的過程中透過文獻\cite{smc_1}以及文獻\cite{smc_2}了解順滑模態控制器之介紹及公式推導，在文獻\cite{smc_lqr_1}中Bavarsad, Anna等人說明如何應用線性二次調節器以優化順滑模態中等效控制律(equivalant control law)的部分。在文獻\cite{smc_lqr_2}中Basin, Michael等人提出利用線性二次調節器優化優化順滑模態中的切換控制律(switching control law)，並且在文獻\cite{uan_chung_lin}中林源鐘詳細推導線性二次調節器。同時計算飛機狀態方程式需用到飛機氣動力導係數，文獻\cite{Datcom}中詳細說明Datcom軟體使用方法。在獲得氣動力導係數利用文獻\cite{Flight_stability_and_automatic_control}中計算狀態矩陣公式求得飛機之狀態矩陣。接著文獻\cite{kuo}中詳說明如何在Matlab Simulink中安裝Pxp Support Package環境以及飛控板燒錄方式。在文獻\cite{an_te_lin}中詳細提及座標轉換，說明如何藉由地球固定座標轉至體座標系，解決飛控板無法直接獲得部分狀態問題。
+ \subsection{研究方法}
+\hspace{8mm}
+本研究目的為利用順滑模態理論達到控制器設計，但是滑模態理論本身並沒有提出優化控制器之方法，因此本研究會利用文獻\cite{smc_lqr_1}和\cite{smc_lqr_2}之線性二次調節器進行控制器最佳化設計。接著利用法國達梭系統(Dassault Systemes S.A.)公司開發的3維CAD設計軟體Catia V5進行飛機外型建模，求得飛機重心和轉動慣量數據，並利用文獻\cite{Datcom}之Digital Datcom軟體進行飛機氣動力導係數計算，以計算飛機之動態方程式\cite{Flight_stability_and_automatic_control}，並透過matlab 以及matlab simulink進行控制器設計。在完成實驗模擬後根據文獻\cite{kuo}將程式燒入至Pixhawk 1測試，以實現無人機之自主飛行。
+%%%%%%%%%%%%%%%%%%%%%
+\section{順滑模態控制 }
+\subsection{介紹}
+\hspace{8mm}
+順滑模態控制理論是1950年代由蘇聯工程師提出，起初應用於馬達控制，為可變結構控制系統(Variable Structure Control,VSC)的理論之一，屬於強健控制(Robust Control)的一種，其優點在於良好追蹤目標、抵抗系統不確定性以及抵抗外界擾動的能力，而順滑模態控制理論有著簡單易學之特性，因此吸引各家學者投入研究，使順滑模態成為蓬勃發展之控制理論。
+\par 控順滑模態控制設計包含兩部分，第一步問是當系統的狀態位於順滑表面外時，需設計控制器使得狀態在有限時間內導向順滑表面，此階段稱為迫近模態(reaching mode)；第二部分稱為順滑模態(sliding mode)，當狀態為於順滑平面上時，能保證狀態處於順滑表面上不會脫離，並將狀態導向目標點($x_d$)。
+\par 利用順滑模態進行控制器設計時，需設計順滑面(sliding surface)，如圖\ref{fig:sliding mode concept}，在此定義順滑模態方程式(sliding function)為式~(\ref{eqn:sliding_sur})，$s(t)$為本研究設計之順滑面，$c$為設計之將系統狀態導向順滑表面之順滑向量(sliding vector)，為$1\times n$之實數矩陣，當系統位於順滑面上時，符合$s(t) = 0$之條件。
+\begin{equation} s(t) = cx(t) ,\quad  c \in R^{1\times n}
+\label{eqn:sliding_sur}
+\end{equation}\\
+順滑面$s$是一個連續的交接面，在此假設順滑面為$s = 0$，在連續的觀點下順滑面會將系統分成兩個子空間，分別是$s>0$以及$s<0$如圖\ref{fig:sliding mode concept}所示。為了使系統在有限時間內收斂，需符合式~(\ref{eqn:lim_s_dots})之條件。
+\begin{equation} \lim_{t \rightarrow \infty } s\dot{s}<0
+\label{eqn:lim_s_dots}
+\end{equation}\\
+根據式~(\ref{eqn:lim_s_dots})可得知當$s>0$時，$s$的值將隨時間遞增，此時$\dot{s}$需滿足 $\dot{s}<0$；反之當$s<0$時，$s$的值將隨時間遞檢，此時$\dot{s}$需滿足 $\dot{s}>0$。
+\par 順滑模態的實現會利用切換條件(switching condition)，因此定義切換函數(switching function)為$\textrm{sgn(s)}$如圖\ref{fig:sgn}，當系統位於$s>0$之子空間時$\textrm{sgn(s)}$等於1，系統位於順滑面上時$\textrm{sgn(s)}$等於0，系統位於$s<0$之子空間時$\textrm{sgn(s)}$等於-1。
+ 而$\textrm{sgn(s)}$的數學表示式為式~(\ref{eqn:sgn}):
+\begin{equation} \textrm{sgn(s)} = \left\{\begin{matrix}
+1,\quad s>0 \\
+0,\quad  s =0\\
+-1,\quad s< 0
+\end{matrix}\right.
+\label{eqn:sgn}
+\end{equation}\\
+但是在控制律中加入切換函數會導致高頻切跳(chatter)，造成能量損耗，同時導致馬達和伺服機的損壞，而且式~(\ref{eqn:sgn})的切換條件無法應用在現實的系統中，因為沒有系統能進行無限快的切換，因此提出順滑層(boundary layer)的概念，將原本順滑面改成順滑層的概念。
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.3\textwidth]{sat.jpg}
+\caption{飽和函數概念圖}
+\label{fig:sat}
+\end{figure}
+\par 而順滑層的數學定義為~(\ref{eqn:boundary layer define}):
+\begin{equation} \bar{A} = \left \{ x|s\left ( x,t \right )  = \pm \Phi \right \}, \quad \Phi> 0
+\label{eqn:boundary layer define}
+\end{equation}\\
+其中$\bar{A}$為順滑層厚度，使狀態在順滑層內反覆切跳，此做法雖然會降低控制精準度，卻能解決現實中無法實現$\textrm{sgn(s)}$函數造成的無限快切換的問題，並降低對馬達和伺服機的不良影響，因此實際應用的切換函數為式~(\ref{eqn:sat_eq})，概念如圖\ref{fig:sat}，稱為飽和函數(saturation function)。當系統位於順滑層外時，$\textrm{sgn}\left ( s,\Phi \right )$為1或-1；系統位於順滑層內時，$\textrm{sgn}\left ( s,\Phi \right )$為$s/\Phi$。
+\begin{equation} \textrm{sgn}\left ( s,\Phi \right ) = \left\{\begin{matrix}
+1,\quad s>\Phi \\
+s/\Phi,\quad \left | s  \right | \leq \Phi\\
+-1,\quad s< -\Phi
+\end{matrix}\right.
+\label{eqn:sat_eq}
+\end{equation}\\
+順滑層厚度的大小會影響控制器的表現，當$\Phi$越大時，控制的精準度會下降，造成誤差增大，反之$\Phi$越小，控制的精準度會提升，但是容易引起不必要的高頻切跳，進而造成伺服機和馬達損壞。
+
+\subsection{順滑模態控制律推導}
+ \hspace{8mm}
+ 世界上並無存在真正的線性系統，大多數情況都為非線性系統，但由於非線性系統的複雜度極高，使控制器設計不易，因此在大多數情況下都會將系統的動態方程式(equation of motion)做線性化，並化簡成狀態空間(state-space)的形式，如式~(\ref{eqn:state_space})。因此本研究假設無人機之動態方程式在小擾動情況下，經由線性化後以線性狀態空間表達，如式~(\ref{eqn:state_space})。%而且控制器採用線性非時變(Linear time-invariant, LTI)系統和狀態回授控制(State-feedback)，將系統的狀態向量乘上增益值後和控制目標(Control goal)比較，將差值輸入至系統使其修正誤差。
+\begin{equation} \dot{\textbf{x}} = \textbf{A} \textbf{x}(t) + \textbf{B} \textbf{u}(t)
+\label{eqn:state_space}
+\end{equation}\\
+$\textbf{A} \in \mathbb{R}^{n\times n}$為狀態矩陣(state matrix)，$\textbf{B}\in \mathbb{R}^{n\times m}$為輸入矩陣，$\textbf{x} \in \mathbb{R}^n$為系統的狀態變數(state)，$\textbf{u} \in \mathbb{R}^m$為系統的控制律(control law)。而控制器的目的是將系統狀態導向要求之控制目標(control goal)，因此定義$\textbf{x}_d \in \mathbb{R}^n$為控制目標，式~(\ref{eqn:sliding_surface})為定義之順滑模態方程式:\\
+\begin{eqnarray}
+\begin{aligned}
+\textbf{ S(t)} &= \textbf{C} (\textbf{x}(t)-\textbf{x}_d) , \quad  \textbf{C} \in \mathbb{R}^{m\times n}\\
+ \textbf{S(t)} &= \begin{bmatrix}
+s_1 & s_2 &\cdots  & s_m
+\end{bmatrix}^{T}
+\label{eqn:sliding_surface}
+\end{aligned}
+\end{eqnarray}	\\
+順滑模態的目標為設計順滑向量$\textbf{C}$，讓狀態軌跡往順滑表面移動，式
+~(\ref{eqn:limit})為系統狀態和控制目標的誤差在時間趨近無限大時，應趨近為零，使狀態(state)位於順滑模態上。
+\begin{equation} \lim_{t\rightarrow \infty } \left [ \textbf{x}(t) - \textbf{x}_d(t) \right ] =
+\begin{bmatrix}
+0\\
+\vdots\\
+0
+\end{bmatrix}
+\label{eqn:limit}
+\end{equation}\\
+而式~(\ref{eqn:u})為順滑模態的控制律，分為$\textbf{u}_{eq}$和$\textbf{u}_{sw}$，其中$\textbf{u}_{eq}$為等效控制律(equivalant control law)，$\textbf{u}_{sw}$為切換控制律(switching control law)，等效控制律的目的為將狀態導向順滑模態之控制律；切換控制律的目的為確保狀態處於順滑表面上。
+\begin{equation} \textbf{u} = \textbf{u}_{eq} + \textbf{u}_{sw}
+\label{eqn:u}
+\end{equation}\\
+等效控制發生在系統的狀態位於順滑表面上，為$\textbf{S} = \begin{bmatrix} 0 & \cdots & 0 \end{bmatrix}^T$，對$\textbf{S}$做一次微分並結合式~(\ref{eqn:state_space})和式~(\ref{eqn:sliding_surface})可得式~(\ref{eqn:dot_s}):
+\begin{equation} \dot{\textbf{S}} = \textbf{C} \left (\dot{\textbf{x}}(t)-\dot{\textbf{x}_d}\right ) = \textbf{CAx}(t) + \textbf{CBu}(t)- \textbf{C}\dot{\textbf{x}_d} = 0
+\label{eqn:dot_s}
+\end{equation}\\
+移項並整理可得出式~(\ref{eqn:u_eq})為等效控制$\textbf{u}_{eq}$，完成抵達順滑模態之控制律設計:
+\begin{equation} \textbf{u}_{eq} = -\left ( \textbf{CB} \right )^{-1}\textbf{CAx}(t) + \left ( \textbf{CB} \right )^{-1} \textbf{C} \dot{\textbf{x}_d}
+\label{eqn:u_eq}
+\end{equation}\\
+為了使系統狀態保持在順滑面上並向控制目標移動，因此設計式~(\ref{eqn:u_sw})為切換控制律$u_{sw}$。
+\begin{equation} \textbf{u}_{sw} = -\left ( \textbf{CB} \right )^{-1}
+\begin{pmatrix}
+\left(\gamma + \eta\right ) \textrm{sat} \left ( s_{1},\Phi \right) \\
+\vdots \\
+\left(\gamma + \eta\right ) \textrm{sat} \left ( s_{m},\Phi \right)
+\end{pmatrix}\\
+\label{eqn:u_sw}
+\end{equation}\\
+其中$\gamma  = \left \| C \right \| \sigma(x,t) $，$ \sigma(x,t) $為擾動，$\eta$為大於零的常數，當$\eta$越小時，其收斂時間會越長，反之越大的$\eta$會導致切跳(chattering)發生。
+結合式~(\ref{eqn:u_eq})和式~(\ref{eqn:u_sw})可得式~(\ref{eqn:u_total})控制輸入$\textbf{u}$:
+\begin{eqnarray}
+\begin{aligned}
+\textbf{ u} = \textbf{u}_{eq} + \textbf{u}_{sw}  = &-\left ( \textbf{CB} \right )^{-1}\left( \textbf{CAx}(t) - \textbf{C}\dot{\textbf{x}_d} \right ) \\
+&-\left ( \textbf{CB} \right )^{-1}
+\begin{pmatrix}
+\left(\gamma + \eta\right ) \textrm{sat} \left ( s_{1},\Phi \right) \\
+\vdots \\
+\left(\gamma + \eta\right ) \textrm{sat} \left ( s_{m},\Phi \right)
+\end{pmatrix}\\
+\label{eqn:u_total}
+\end{aligned}
+\end{eqnarray}\\
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% \subsection{比例積分型順滑模態控制律推導}
+% \hspace{8mm}
+% 在比例積分型順滑模態(Proportional-Integral Sliding Mode Control(PISMC))中定義滑模態方程式為式~(\ref{eqn:S_PI})，$S_P$為比例型順滑模態，$S_I$為積分型順滑模態。\\
+%\begin{equation} S_{PI} = S_P + S_I
+%\label{eqn:S_PI}
+%\end{equation}\\
+%式~(\ref{eqn:S_PI_dot})為對比例積分型順滑模態做一次微分:
+%\begin{equation} \dot{S_{PI}} = C \dot{E} = C \left ( \dot{x} - \dot{x_d} + x - x_d \right )
+%\label{eqn:S_PI_dot}
+%\end{equation}\\
+%式~(\ref{eqn:u_pismc})為結合式~(\ref{eqn:state_space})、式
+%~(\ref{eqn:limit})、式~(\ref{eqn:u_sw})和式~(\ref{eqn:S_PI_dot})並根據控制目標為0，得出之控制律為式~(\ref{eqn:u_pismc})。
+%\begin{eqnarray}
+%\begin{aligned}
+%u =  &-\left ( CB \right )^{-1}CAx -\left ( CB \right )^{-1}Cx \\
+%&-\left ( CB \right )^{-1} \left(\gamma + \eta\right ) sat\left ( S_{PI},\Phi \right )
+%\label{eqn:u_pismc}
+%\end{aligned}
+%\end{eqnarray}\\
+%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{控制律最佳化}
+\hspace{8mm}
+順滑模態控制器本身並無最佳化控制律之設計，因此在本研究中最佳化方式進行控制律設計。其控制律為式~(\ref{eqn:u_lqr_1})，其中$K$為狀態回授的增益，$K\in \mathbb{R}^{1 \times n}$，而$r(t)$為控制目標。
+\begin{equation} u = -K x(t) + r(t)
+\label{eqn:u_lqr_1}
+\end{equation}\\
+但因為能使系統收斂的增益K有無限多組值，若要從中找出一個最佳的值的值是極其困難的，所以本研究藉由Linear-Quadratic Tracking的方法來找出控制率K的最佳解。
+\par 首先定義J為二次成本函數(Quadratic cost function)如式~(\ref{eqn:cost_function})，其中$Q_d$、$N$和$R$為權重係數，再根據系統的特性來挑選權重值，使控制器達到最佳控制之目的。
+\begin{eqnarray}
+\begin{aligned}
+ J &= \int_{t_0}^{t_f} \frac{1}{2} [ (y(t)-y_d)^TQ_d(y(t)-y_d) \\
+   &+ u^T(t)Ru(t) + 2(y(t)-y_d)^T Nu ]dt
+\label{eqn:cost_function}
+\end{aligned}
+\end{eqnarray}	\\
+其中$Q = \bar{C}^T Q_d \bar{C}$為$n \times n $之實數矩陣，其中$\bar{C}$為狀態輸出、$R$為$m \times m $之實數矩陣，兩者皆為正定矩陣(Positive-definite matrix)和 對角矩陣(Diagonal matrix)，$N \in \mathbb{R}^{m \times n}$之矩陣，y為狀態輸出，$y_d$為目標軌跡。為了使測量
+函數最小值，以達到最佳控制之結果，定義Hamiltonian為式~(\ref{eqn:Hamiltonian})。
+\begin{eqnarray}
+\begin{aligned}
+ H\left ( y,u,t \right ) &=  \frac{1}{2} \{(y(t)-y_d)^TQ_d(y(t)-y_d)\\
+                         &+ u^T(t)Ru(t) + 2(y(t)-y_d)^T Nu   \} \\
+                         &+ \lambda^TAx(t) +  \lambda^TBu(t)
+\label{eqn:Hamiltonian}
+\end{aligned}
+\end{eqnarray}	\\
+而最佳化的條件為式~(\ref{eqn:costate_eq})、式~(\ref{eqn:costate_eq2})，
+\begin{eqnarray}
+\begin{aligned}
+ \dot{\lambda}(t) = -\frac{\partial H\left ( x,u,t \right )}{\partial x} = &-\bar{C}^T Q_{d}  y(t)-A^T\lambda(t) \\
+&+ Nu(t) + \bar{C}^T Q_{d}  y_d
+\label{eqn:costate_eq}
+\end{aligned}
+\end{eqnarray}\\
+%%%%
+\begin{equation} 0 = -\frac{\partial H\left ( x,u,t \right )}{\partial u} = -Ru(t)-B^T \lambda(t) - N^T x(t)
+\label{eqn:costate_eq2}
+\end{equation}\\
+經由推導可得到式~(\ref{eqn:riccati_eq})和式~(\ref{eqn:riccati_eq_2})，且P為Riccati equation的解。
+\begin{eqnarray}
+\begin{aligned}
+ -Q - A^T P - PA + \left ( PB + N \right )R^{-1} \left (B^T P + N^T \right )\\ = 0
+\label{eqn:riccati_eq}
+\end{aligned}
+\end{eqnarray}\\
+\begin{equation} -\left ( A^T + NR^{-1}B^T \right ) v + PBR^{-1}B^T v + Qr = 0
+\label{eqn:riccati_eq_2}
+\end{equation}\\
+接著根據式~(\ref{eqn:u_lqr_1})之控制率和式~(\ref{eqn:u_total})之順滑模態控制律結合，將順滑模態控制律中的等效控制$\textbf{u}_{eq}$如式~(\ref{eqn:u_eq})以及切換控制如式~(\ref{eqn:u_sw})，用最佳化方式求得控制律，將原先式~(\ref{eqn:u_total})之順滑模態控制律改寫成式~(\ref{eqn:u_lqr_sliding})，其中$\textbf{K} = \textbf{R}^{-1}(\textbf{B}^T \textbf{P} + \textbf{N}^T)$。
+\begin{equation} \textbf{u}(t) = -\textbf{Kx}(t) -\textbf{K}\begin{pmatrix}
+\textrm{sat}\left ( x(t),\Phi \right) \\
+\vdots \\
+\textrm{sat}\left ( x(t),\Phi \right)
+\end{pmatrix}\\
+ -\textbf{R}^{-1} \textbf{B}^T \textbf{v}
+\label{eqn:u_lqr_sliding}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{飛機建模}
+\subsection{飛機外型參數}
+\hspace{8mm}
+本研究選擇之飛行器為市面上販售之機型skysurfer，其外型參數如表\ref{tab:plane_data}。
+\begin{table}[H]
+\caption{飛機外型參數}
+	\label{tab:plane_data}
+	\begin{center}
+	\begin{tabular}{|c|c|c|}
+	\hline
+ 	主翼類型&NACA2412  &  \\ \hline
+	主翼翼展&1.4  & m \\ \hline
+ 	主翼弦長&0.2  & m \\ \hline
+ 	主翼面積&0.566  &$m^2$  \\ \hline
+ 	主翼上帆角& 3 & deg \\ \hline
+ 	副翼可控制角度& $\pm 25$ &deg  \\ \hline
+ 	水平尾翼類型&NACA0009  &  \\ \hline
+ 	水平尾翼翼展& 0.45 & m \\ \hline
+ 	水平尾翼弦長& 0.11 & m  \\ \hline
+ 	水平尾翼面積& 0.102 &$m^2$  \\ \hline
+ 	升降舵可控制角度&$\pm 25$  &deg  \\ \hline
+ 	垂直尾翼類型&NACA0009  &  \\ \hline
+ 	垂直尾翼長&0.17  & m \\ \hline
+ 	垂直尾翼弦長&0.13  &m  \\ \hline
+ 	垂直尾翼面積& 0.031 &$m^2$  \\ \hline
+ 	方向舵可控制角度&$\pm 25$  &deg  \\ \hline
+ 	全機長&0.84  & m  \\ \hline
+ 	全機重量&1.1  &kg  \\ \hline
+	\end{tabular}
+	\end{center}
+	\end{table}
+\subsection{飛機外型與建模}
+為了求得飛機重要之性能參數，利用繪圖軟體Catia進行飛機外型之繪製，如圖\ref{fig:skysurfer_all}，並且根據Catia內建measure inertia功能可求得表\ref{tab:cg_and_inertia}之參數。
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.4\textwidth]{skysurfer_all.jpg}
+\caption{skysurfer全機圖}
+\label{fig:skysurfer_all}
+\end{figure}
+\begin{table}[H]
+	\caption{飛機重心及轉動慣量參數}
+	\label{tab:cg_and_inertia}
+	\begin{center}
+	\begin{tabular}{|c|c|c|}
+	\hline
+	 參數&數值&單位 \\
+	\hline
+	 x軸重心&0.329 &m \\
+	\hline
+	 y軸重心&$-8 \times 10^{-11}$ & m \\
+	\hline
+	 z軸重心&0.031  & m \\
+	\hline
+	 $I_{x}$&0.061  &$kg\cdot m^{2}$  \\
+	\hline
+	 $I_{y}$& 0.03 & $kg\cdot m^{2}$ \\
+	\hline
+	 $I_{z}$& 0.088 &$kg\cdot m^{2}$  \\
+	\hline
+	 $I_{xz}$&$8.623 \times 10^{-4}$ & $kg\cdot m^{2}$ \\
+	\hline
+	\end{tabular}
+	\end{center}
+	\end{table}
+\subsection{橫向狀態矩陣計算}
+由於飛機控制器設計需要狀態矩陣，根據文獻\cite{Flight_stability_and_automatic_control}進行計算，而狀態矩陣計算需獲得飛機之導係數，因此本研究根據Digital Datcom計算飛機之無因次導係數並配合有因次導係數計算公式求得飛機之狀態矩陣。而橫向無因次導係數如表\ref{tab:lateral}，橫向有因次導係數計算結果如表\ref{tab:lateral_formula_data}。
+\begin{table}[H]
+	\caption{飛機橫向無因次導係數}
+	\label{tab:lateral}
+	\large
+	\begin{center}
+	\begin{tabular}{|c|c|}
+	\hline
+	$C_{y\beta}$ &-0.2443\\
+	\hline
+	$C_{n\beta}$& 0.0263 \\
+	\hline
+	$C_{l\beta}$  & -0.0572 \\
+	\hline
+	$C_{yp}$ & -0.1334\\
+	\hline
+	$C_{np}$ & -0.0036 \\
+	\hline
+	$C_{lp}$ & -0.3528 \\
+	\hline
+	$C_{yr}$  & 0.3450\\
+	\hline
+	$C_{nr}$ & -0.0378 \\
+	\hline
+	$C_{lr}$ & 0.1126 \\
+	\hline
+	$C_{y \delta a}$  & 0 \\
+	\hline
+	$C_{y \delta r}$ &0.0049 \\
+	\hline
+	$C_{n \delta a}$ &$7.198 \times 10^{-4}$\\
+	\hline
+	$C_{n \delta r}$&-0.0017\\
+	\hline
+	$C_{l \delta a}$&-0.0054 \\
+	\hline
+	$C_{l \delta r}$&$1.7906\times 10^{-4}$ \\
+	\hline
+	\end{tabular}
+	\end{center}
+	\end{table}
+\begin{table}[H]
+	\caption{飛機橫向有因次導係數}
+	\label{tab:lateral_formula_data}
+	\large
+	\begin{center}
+	\begin{tabular}{|c|c|}
+	\hline
+	 $Y_{\beta}$& -4.1945\\
+	\hline
+	 $N_{\beta}$& 7.8087\\
+	\hline
+	  $L_{\beta}$& -25.0278 \\
+	\hline
+	 $Y_{p}$& -0.1522 \\
+	\hline
+	 $N_{p}$& -0.0707 \\
+	\hline
+	 $L_{p}$& -10.2524\\
+	\hline
+	 $Y_{r}$ &0.3936 \\
+	\hline
+	 $N_{r}$ & -0.7447  \\
+	\hline
+	 $L_{r}$& 3.2722 \\
+	\hline
+	 $Y_{\delta a}$ & 0  \\
+	\hline
+	 $Y_{\delta r}$ & 0.0846\\
+	\hline
+	 $N_{\delta a}$ & 0.2134\\
+	\hline
+	$N_{\delta r}$ & -0.5114\\
+	\hline
+	$L_{\delta a}$ & -2.3743\\
+	\hline
+	$L_{\delta r}$ & 0.0783\\
+	\hline
+	\end{tabular}
+	\end{center}
+	\end{table}
+根據表\ref{tab:lateral}、表\ref{tab:lateral_formula_data}以及參考文獻\cite{Flight_stability_and_automatic_control}之公式可計算出橫向狀態矩陣為式~(\ref{eqn:lat_state_space})。
+\begin{eqnarray}
+\begin{aligned}
+\begin{bmatrix}
+\Delta \dot{\beta } \\
+\Delta \dot{p}\\
+\Delta \dot{r}\\
+\Delta \dot{\phi}
+\end{bmatrix}  =
+&\begin{bmatrix}
+-0.3981 & -0.0144 &-0.9626  &0.9307 \\
+-24.9043 & -10.2554 &3.2605  & 0\\
+7.5320 & -0.1847 & -0.7085 &0 \\
+0 &1  &0  &0
+\end{bmatrix}\\
+&\begin{bmatrix}
+\Delta \beta    \\
+\Delta p \\
+\Delta r  \\
+\Delta \phi
+\end{bmatrix}  +
+\begin{bmatrix}
+0 &0.0080 \\
+-2.3713 & 0.0699\\
+0.1870 & -0.5106\\
+0 &0
+\end{bmatrix}
+\begin{bmatrix}
+\Delta \delta_a \\
+\Delta \delta_r
+\end{bmatrix}
+\label{eqn:lat_state_space}
+\end{aligned}
+\end{eqnarray}
+根據式~(\ref{eqn:lat_state_space})之橫向狀態矩陣，可以求出一個四階特徵方程式，如式~(\ref{eqn:lat_char_eq})
+\begin{equation}
+s^4 + 11.362s^3 + 19.123s^2 + 105.196s - 6.435 = 0
+\label{eqn:lat_char_eq}
+\end{equation}
+根據求解式~(\ref{eqn:lat_char_eq})之特徵方程式，可以得到兩個實根和一組共軛複數根，兩個實根分別代表位於實軸上的螺旋基態(Spiral mode)和滾轉基態(Roll mode)，而共軛複數根則代表荷蘭滾基態(Dutch roll mode)，其特徵根如表\ref{tab:lateral_eigenvalue}。根據表\ref{tab:lateral_eigenvalue}之橫向特徵根，會發現螺旋基態位於複數平面之右半平面，代表縱向為非穩定系統，在無控制之條件下其系統會發散，因此需要控制器對其系統進行控制才能使其穩定。
+\begin{table}[H]
+	\caption{飛機橫向特徵根}
+	\label{tab:lateral_eigenvalue}
+	\begin{center}
+	\begin{tabular}{|c|c|c|}
+	\hline
+	 螺旋基態&滾轉基態&荷蘭滾基態\\
+	\hline
+	 $0.060483$&$-10.5004$& $-0.46103 \pm  3.1496 i$\\
+	\hline
+	\end{tabular}
+	\end{center}
+	\end{table}
+\subsection{縱向狀態矩陣計算}
+根據Digital Datcom計算飛機之縱向無因次導係數為表\ref{tab:longitudinal}，以及縱向有因次導係數計算結果如表\ref{tab:longitudinal_formula_data}。
+\begin{table}[H]
+	\caption{飛機縱向有因次導係數}
+	\label{tab:longitudinal}
+	\large
+	\begin{center}
+	\begin{tabular}{|c|c|}
+	\hline
+	 $C_{D_0}$&0.0540 \\
+	\hline
+	 $C_{D_u}$& 0\\
+	\hline
+	 $C_{L_u}$ &0  \\
+	\hline
+	 $C_{L_0}$&0.4420 \\
+	\hline
+	 $C_{D_\alpha }$& 0 \\
+	\hline
+	 $C_{m_u }$& 0\\
+	\hline
+	 $C_{m_\alpha  }$ & -1.3210\\
+	\hline
+	 $C_{L_\alpha  }$ & 4.8880 \\
+	\hline
+	 $C_{L_{\dot{\alpha}}}$ & 1.9970 \\
+	\hline
+	 $C_{L_q}$& 6.9290 \\
+	\hline
+	 $C_{m_q}$ &-12.8200  \\
+	\hline
+	 $C_{m_{\dot{\alpha}}}$ &-5.1340 \\
+	\hline
+	 $C_{D_{\delta e}}$ &0 \\
+	\hline
+	 $C_{L_{\delta e}}$& 0.0081\\
+	\hline
+	 $C_{m_{\delta e}}$& -0.0209 \\
+	\hline
+	\end{tabular}
+	\end{center}
+	\end{table}
+\begin{table}[H]
+	\caption{飛機縱向無因次導係數}
+	\label{tab:longitudinal_formula_data}
+	\large
+	\begin{center}
+	\begin{tabular}{|c|c|}
+	\hline
+	 $X_u$&-0.2640 \\
+	\hline
+	 $Z_u$&-1.4406 \\
+	\hline
+	 $M_u$ & 0  \\
+	\hline
+	 $X_w$& 0.7203 \\
+	\hline
+	 $Z_w$& -8.0534 \\
+	\hline
+	 $M_w$& -14.9342 \\
+	\hline
+	 $X_{\dot{w}}$ &0 \\
+	\hline
+	 $Z_{\dot{w}}$ &0  \\
+	\hline
+	 $M_{\dot{w}}$ & -0.5509 \\
+	\hline
+	 $X_q$& 0 \\
+	\hline
+	 $Z_q$ & -1.1291\\
+	\hline
+	 $M_q$ &-14.4933\\
+	\hline
+	 $X_{\delta e}$ &0 \\
+	\hline
+	 $Z_{\delta e}$& -0.1392\\
+	\hline
+	 $M_{\delta e}$& -2.4871 \\
+	\hline
+	\end{tabular}
+	\end{center}
+	\end{table}
+根據表\ref{tab:longitudinal}、表\ref{tab:longitudinal_formula_data}以及參考文獻\cite{Flight_stability_and_automatic_control}之公式計算出縱向狀態矩陣為式~(\ref{eqn:lon_state_space})。
+\begin{eqnarray}
+\begin{aligned}
+\begin{bmatrix}
+\Delta \dot{u} \\
+\Delta \dot{w}\\
+\Delta \dot{q}\\
+\Delta \dot{\theta}
+\end{bmatrix}  =
+&\begin{bmatrix}
+-0.2640  & 0.7203 &0  &-9.8063 \\
+-1.4406 & -8.0534 &10.5360  & 0\\
+0.7936& -10.4977 & -20.2975 &0 \\
+0 &1  &0  &0
+\end{bmatrix}\\
+&\begin{bmatrix}
+\Delta u    \\
+\Delta w \\
+\Delta q  \\
+\Delta \theta
+\end{bmatrix} +
+\begin{bmatrix}
+0 & 2.851 \\
+-0.1392 &0 \\
+-2.4104 &0 \\
+0  &0
+\end{bmatrix}
+\begin{bmatrix}
+\Delta \delta_e \\
+\Delta \delta_T
+\end{bmatrix}
+\label{eqn:lon_state_space}
+\end{aligned}
+\end{eqnarray}
+根據式~(\ref{eqn:lon_state_space})之縱向狀態矩陣，可以求出一個四階特徵方程式，如式~(\ref{eqn:lon_char_eq})
+\begin{equation}
+s^4 + 28.614s^3 + 282.590s^2 + 95.172s + 210.968 = 0
+\label{eqn:lon_char_eq}
+\end{equation}
+根據求解式~(\ref{eqn:lon_char_eq})之特徵方程式，可以求得兩組共軛複數根，其中一組為遠離虛軸之短周期特徵解，另一組為靠近虛軸之長周期特徵解如表\ref{tab:longitudinal_eigenvalue}。根據表\ref{tab:longitudinal_eigenvalue}可得知，在縱向方面所有的特徵值皆在複數平面之左半平面，故此次統為穩定。
+\begin{table}[H]
+	\caption{飛機縱向特徵根}
+	\label{tab:longitudinal_eigenvalue}
+	\large
+	\begin{center}
+	\begin{tabular}{|c|c|}
+	\hline
+	 短周期&長周期 \\
+	\hline
+	 $-14.1737 + 8.5641 i$&$-0.13376 +  0.86683 i$ \\
+	\hline
+	 $-14.1737 -8.5641 i$ &$-0.13376 -  0.86683 i$  \\
+	\hline
+	\end{tabular}
+	\end{center}
+	\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{系統模擬}
+\hspace{8mm}
+系統模擬是將設計完之控制器帶入線性動態方程式後，利用數值方法找出方程式之數值解，使其了解加入控制器之系統如何運動。將式~(\ref{eqn:lat_weight_nav})設計之權重係數Q、R和回授K帶入式~(\ref{eqn:u_lqr_sliding})，得出設計之順滑模態控制器，其步階輸入之模擬結果如圖\ref{fig:skysurfer_phi_nav}，其步階響應時間如表\ref{tab:phi_step_info}。
+\begin{eqnarray}
+\begin{aligned}
+Q = \begin{bmatrix}
+6 & 0 &0 &0 \\
+0 & 20 &0  &0 \\
+0 & 0 & 1 &0 \\
+0 & 0 & 0 & 10
+\end{bmatrix},
+R = \begin{bmatrix}
+30 & 0\\
+0 & 45
+\end{bmatrix},\\
+N = \begin{bmatrix}
+0 &0 \\
+1.3 &-3 \\
+0 &0 \\
+-1.6 &-3.8
+\end{bmatrix}\\
+K = \begin{bmatrix}
+-0.0854 &-0.1315  & -0.1230 &-0.7836 \\
+-0.0162 &-0.0301  & -0.2540 &-0.1841
+\end{bmatrix}
+\label{eqn:lat_weight_nav}
+\end{aligned}
+\end{eqnarray}\\
+%%%%
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.3\textwidth]{skysurfer_phi_nav.jpg}
+\caption{滾轉步階響應圖}
+\label{fig:skysurfer_phi_nav}
+\end{figure}
+\begin{table}[H]
+	\caption{滾轉角度步階響應時間}
+	\label{tab:phi_step_info}
+	\large
+	\begin{center}
+	\begin{tabular}{|c|c|c|}
+	\hline
+	RiseTime &5.5604  & s \\ \hline
+	SettlingTime &9.9199  & s \\ \hline
+	Overshoot & 0 & \% \\ \hline
+	\end{tabular}
+	\end{center}
+	\end{table}
+\subsection{縱向控制器模擬}
+式~(\ref{eqn:lon_weight_nav})為縱向控制器之權重係數，其步階輸入之模擬結果如圖\ref{fig:skysurfer_theta_nav}，其步階響應時間如表\ref{tab:theta_step_info_nav}。
+\begin{eqnarray}
+\begin{aligned}
+Q = \begin{bmatrix}
+3.7 & 0 &0 &0 \\
+0 & 40 &0  &0 \\
+0 & 0 & 1 &0 \\
+0 & 0 & 0 & 11
+\end{bmatrix},
+R = \begin{bmatrix}
+8 & 0\\
+0 & 9
+\end{bmatrix},\\
+N = \begin{bmatrix}
+0 &0 \\
+1.3 &-3 \\
+0 &0 \\
+-1.6 &-3.8
+\end{bmatrix}\\
+K = \begin{bmatrix}
+0.0035 & 0.0257   & -0.1384 &-1.5680 \\
+0.5428 &-0.3200  & -0.0044 &-0.6177
+\end{bmatrix}
+\label{eqn:lon_weight_nav}
+\end{aligned}
+\end{eqnarray}\\
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.3\textwidth]{skysurfer_theta_nav.jpg}
+\caption{俯仰角度步階輸入模擬}
+\label{fig:skysurfer_theta_nav}
+\end{figure}
+%
+\begin{table}[H]
+\caption{俯仰角度響應時間}
+	\label{tab:theta_step_info_nav}
+	\large
+	\begin{center}
+	\begin{tabular}{|c|c|}
+	\hline
+	RiseTime &4.7134秒    \\ \hline
+	SettlingTime & 8.3618秒   \\ \hline
+	Overshoot & $2.3445 \times 10^{-4}\%  $  \\ \hline
+	\end{tabular}
+	\end{center}
+	\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{實際試飛測試}
+\hspace{8mm} 分析Pixhawk 1中SD卡紀錄之飛行數據，而圖\ref{fig:phi_test_flight}為自動控制時的滾轉角度數據圖，圖\ref{fig:theta_test_flight}為自動控制時的俯仰角度數據圖。可以發現飛機在滾轉角度和俯仰角度可收歛至控制目標，達成飛機自控飛行之目的。而圖\ref{fig:phi_test_flight}以及圖\ref{fig:theta_test_flight}距離控制目標有些許誤差，這和飛控板的測量誤差有關，以及飛控板在擺放時無法得到完美水平造成，但根據影片仍正常飛行，對飛行無任何影響。而圖\ref{fig:theta_test_flight}中俯仰角度有些許震盪現象，但其震盪幅度皆小於0.01rad，同時根據試飛影片\cite{test2_zero}並無發現任何問題，因此對飛行並無任何影響。
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.3\textwidth]{phi_test_flight.jpg}
+\caption{自控滾轉角度試飛數據圖}
+\label{fig:phi_test_flight}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.3\textwidth]{theta_test_flight.jpg}
+\caption{自控俯仰角度試飛數據圖}
+\label{fig:theta_test_flight}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%
+根據導引控制律設計，依序輸入航點一至航點五之GPS座標，使飛機執行U字型迴轉，根據數據顯示飛機可依照航點進行轉彎，其結果如圖\ref{fig:tracking_1}和圖\ref{fig:tracking_2}。
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.3\textwidth]{tracking_1.jpg}
+\caption{導引控制軌跡圖}
+\label{fig:tracking_1}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.3\textwidth]{tracking_2.jpg}
+\caption{導引控制軌跡圖}
+\label{fig:tracking_2}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{結論}
+\hspace{8mm}本研究著重於利用順滑模態控制配合Pixhawk 1飛控板達成無人機自主飛行，透過實際飛行，飛機之滾轉和俯仰姿態皆可朝控制目標收斂，並且在姿態控制的基礎上，完成導引控制之驗證。
+\titleformat{\section}{\bfseries\large}{\xCJKnumber{\thesection}\,、}{0em}{}
+\xeCJKsetup{AutoFakeBold=true, AutoFakeSlant=true}
+%\section*{誌謝}
+%\hspace{8mm}本文作者感謝科技部資助研發經費，案號為：MOST 110-2221-E-032 -022 -。
+%參考文獻
+\begin{thebibliography}{9}
+\bibitem{smc_1}
+Lin, Chien-Hong, et al. “Autonomous Hovering of an Experimental Unmanned Helicopter System with Proportional-Integral Sliding Mode Control.”\textit{ ASCE J.Aerosp.Eng}, vol. 24(3), June 2011, pp. 338–348.
+%%
+\bibitem{smc_2}
+Lin, Chien-Hong, and Fu-Yuen Hsiao. “Proportional-Integral Sliding Mode Control with an Application in the Balance of a Two-Wheel Vehicle System.” \textit{Appl.Sci}, June 2020.
+%%
+\bibitem{smc_lqr_1}
+Bavarsad, Anna, et al. “Optimal Sliding Mode Controller for an Active Transfemoral Prosthesis Using State-Dependent Riccati Equation Approach.” \textit{Appl.Sci}, vol. 45, May 2020, pp. 6559–6572.
+%%
+\bibitem{smc_lqr_2}
+Basin, Michael, et al. “Sliding Mode Optimal Regulator for a Bolza-Meyer Criterion with Non-Quadratic State Energy Terms.” \textit{2009 American Control Conference},St. Louis, MO, USA.
+%%
+\bibitem{uan_chung_lin}
+林源鐘，"無尾翼無人飛行載具之設計與實現，"淡江大學航空太空工程學系碩士班，2008
+%%
+\bibitem{Datcom}
+B.Galbraith,Datcom+ Pro User's Manual.Holy Cows, Inc., Lake Drawdy Drive, 3 ed.
+%%
+\bibitem{Flight_stability_and_automatic_control}
+R.C.Nelson \textit{et al.,Flight stability and automatic control},vol.2.WCB/McGraw Hill New York,1998.
+%%
+\bibitem{kuo}
+郭軒煒，"利用Matlab/Simulink 結合 Pixhawk 實現無人機自主飛行，"淡江大學航空太空工程學系碩士班，2019
+%%
+\bibitem{an_te_lin}
+林安德，"無尾翼無人機之飛行模擬，"淡江大學航空太空工程學系碩士班，2020
+%%
+\bibitem{test2_zero}
+第二次試飛影片(自穩部分)，https://www.youtube.com/watch?v=EJAWy308EWc
+\end{thebibliography}
+
+\end{multicols}
+
+\end{document}

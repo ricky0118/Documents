@@ -1,0 +1,42 @@
+
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and republish this document.
+
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[a4paper, total={6in,8in}]{geometry}
+\usepackage{pdfpages}
+
+\usepackage{xeCJK} % Chinese words
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\usepackage{fontspec} % More word fonts
+\setmainfont{Times New Roman}
+\setCJKmainfont{標楷體}
+
+\input{../../TitlePage.tex}
+
+\begin{document}
+
+\MakeTitlePage{2}
+
+\includepdf[pages=-]{handout.pdf}
+
+\subsection*{\#2(c)}
+
+\begin{verbatim}
+clear;clc;close all
+[x1, x2] = meshgrid(-1:0.01:1, -1:0.01:1);
+y = x1.^2+x1.*x2+x2.^2;
+contour(x1, x2, y, 0:0.2:5, "ShowText", "on")
+\end{verbatim}
+
+\begin{center}
+   \includegraphics [width=4in]{HW2_01.png}
+\end{center}
+
+\end{document}

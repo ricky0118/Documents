@@ -1,0 +1,320 @@
+\documentclass{beamer}
+%%% ========== Package setup ==========
+\usepackage{xeCJK}      % Chinese words package
+\usepackage{fontspec}   % Word fonts package
+\usepackage{listings}   % Wrap Figure or table package
+\usepackage{wrapfig}    % Multicolumn package
+\usepackage{multicol}   % Multicolumn package
+\usepackage{pdflscape}  % Landscpae package
+\usepackage{hyperref}   % Hyperlink package
+\usepackage{tikz}       % TikZ picture package(Docs: https://ftp.ntou.edu.tw/ctan/graphics/pgf/base/doc/pgfmanual.pdf)
+\usepackage[backend=bibtex, style=ieee]{biblatex} % Biblatex reference package(Docs: https://distrib-coffee.ipsl.jussieu.fr/pub/mirrors/ctan/macros/latex/contrib/biblatex/doc/biblatex.pdf, Cheat Sheet: https://ftp.ntou.edu.tw/ctan/info/biblatex-cheatsheet/biblatex-cheatsheet.pdf)
+
+\usepackage[outline]{contour} % glow around text
+\usepackage{amsmath}
+\usepackage{mathtools}
+
+%%% ========== Slide setting ==========
+%% Slide theme setup
+\usetheme{CambridgeUS}
+\usecolortheme{wolverine}
+
+%% Setup chinese words encoder
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+%% More word fonts
+\setmainfont{Times New Roman}
+\renewcommand{\familydefault}{\rmdefault}
+\setCJKmainfont{標楷體}
+
+% Setting for figure and table numbering
+\setbeamertemplate{caption}[numbered]
+
+% TikZ setting
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+
+% Biblatex setting
+\addbibresource{refs.bib}
+\ExecuteBibliographyOptions{eprint=false}
+\ExecuteBibliographyOptions{url=false}
+
+%%% ========== Title setup ==========
+\date{June 9, 2022}
+\title{Reinforcement learning for UAV attitude control}
+\author{Wu, Po Hsun}
+\institute[]{\emph{Department of Aerospace Engineering\\ Tamkang University}}
+\logo{\includegraphics[height=1.5cm]{figs/watermark_tku.eps}}
+
+%%% ========== Document ==========
+\begin{document}
+    \maketitle
+
+    % ---------- Contents ----------
+    \section*{Contents}
+    \begin{frame}
+        \frametitle{\secname}
+
+        \tableofcontents
+
+    \end{frame}
+
+    % ---------- Introduction ----------
+    \section{Introduction}
+    \begin{frame}
+        \frametitle{\secname}
+
+        \begin{itemize}
+            \item[1.] What is Attitude Control?
+            \item[2.] What is Reinforcement Learning?
+        \end{itemize}
+
+    \end{frame}
+
+    \subsection*{What is Attitude Control?}
+    \begin{frame}
+        \frametitle{\subsecname}
+        \begin{itemize}
+            \item For Classical Control Theory
+        \end{itemize}
+        \vspace{1 pt}
+
+        \begin{figure}
+            \centering
+            \input{figs/CC_architecture.tikz}
+            \caption{Block diagram for classical control}
+        \end{figure}
+
+    \end{frame}
+
+    \subsection*{What is Reinforcement Learning?}
+    \begin{frame}
+        \frametitle{\subsecname}
+
+        \begin{figure}
+            \centering
+            \includegraphics[scale=.3]{figs/RL_architecture.png}
+            \caption{Reinforcement Learning architecture\cite{Flight_Controller_Synthesis_Via_Deep_Reinforcement_Learning}}
+        \end{figure}
+
+    \end{frame}
+
+    \subsection*{Mix it together}
+    \begin{frame}
+        \frametitle{\subsecname}
+        \begin{itemize}
+            \item Apply reinforcement learning to control theory.
+        \end{itemize}
+
+        \begin{figure}
+            \centering
+            \input{figs/NNC_architecture.tikz}
+            \caption{Block diagram for Neural Network controller}
+        \end{figure}
+
+    \end{frame}
+
+    % ---------- Paper Review ----------
+    \section{Paper Review}
+    \begin{frame}
+        \frametitle{\secname}
+
+        \begin{itemize}
+            \item \fullcite{Flight_Controller_Synthesis_Via_Deep_Reinforcement_Learning}
+                \begin{itemize}
+                    \item[1.] Adding noise to the plane(or environment).
+                    \item[2.] Using Gazebo as a physics simulator.
+                \end{itemize}
+            \item \fullcite{Reinforcement_Learning_for_UAV_Attitude_Control}
+                \begin{itemize}
+                    \item[1.] Provide a training framework.
+                    \item[2.] Comparing some RL algorithm training results.
+                \end{itemize}
+        \end{itemize}
+
+    \end{frame}
+
+    % ---------- Reinforcement Learning ----------
+    \section{Reinforcement Learning}
+    \begin{frame}
+        \frametitle{\secname}
+
+        \begin{itemize}
+            \item RL is a area of Mechine Learning.
+            \item RL will interact with the environment.
+            \item RL aims to achieve the maximum reward by changing the neural network parameters.
+            \input{eqns/Argmax_reward.tex}
+        \end{itemize}
+
+        \begin{figure}
+            \centering
+            \includegraphics[scale=.2]{figs/RL_architecture.png}
+            \caption{Reinforcement Learning architecture\cite{Flight_Controller_Synthesis_Via_Deep_Reinforcement_Learning}}
+        \end{figure}
+
+    \end{frame}
+
+    \subsection*{Artificial Neural Network}
+    \begin{frame}
+        \frametitle{\subsecname}
+
+        \begin{itemize}
+            \item Artificial Neural Network is a nonlinear model.
+            \item \eqref{eq:ANN_matrix} and \eqref{eq:ANN_variable} is the equations of Neural Network
+        \end{itemize}
+
+        \input{eqns/ANN_matrix.tex}
+        \input{eqns/ANN_variable.tex}
+
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{\subsecname}
+
+        \begin{figure}
+            \centering
+            \scalebox{.7}{\input{figs/ANN.tikz}}
+            \caption{Artificial Neural Network}
+        \end{figure}
+
+    \end{frame}
+
+    \subsubsection*{Training target}
+    \begin{frame}
+        \frametitle{\subsubsecname}
+
+        \begin{itemize}
+            \item Target function:
+                $$f(x)=x^2$$
+            \item Database:
+                \begin{itemize}
+                    \item $x=\{0,1,\cdots,9\}$ adding noise with normal distribution($\mu=0, \sigma=0.2$).
+                    \item 100 datas for each point(total 1,000 datas).
+                \end{itemize}
+            \item Configuration:
+                \begin{itemize}
+                    \item 2 hidden layer, each layer with 50 neuros.
+                    \item Two different learning rate($\alpha=0.01, 0.001$).
+                \end{itemize}
+
+        \end{itemize}
+
+    \end{frame}
+
+    \subsubsection*{Training result}
+    \begin{frame}
+        \frametitle{\subsubsecname}
+        \begin{itemize}
+            \item Overfitting happend at $\alpha=0.01$.
+        \end{itemize}
+
+        \begin{figure}
+            \centering
+            \begin{multicols}{2}
+                \includegraphics[width=2.2in]{figs/Value_50_2.jpg}
+                \caption{$f(x)$ vs $x$}
+                \columnbreak
+
+                \includegraphics[width=2.2in]{figs/Error_50_2.jpg}
+                \caption{Relative error}
+            \end{multicols}
+        \end{figure}
+    \end{frame}
+
+    \subsection*{Reinforcement Learning Algorithm}
+    \begin{frame}
+        \frametitle{\subsecname}
+        \begin{itemize}
+            \item Model-free:
+                \begin{itemize}
+                    \item[1.] Does not require a model of the environment.
+                    \item[2.] It's an explicitly a trial-and-error method.
+                \end{itemize}
+            \item Model-base:
+                \begin{itemize}
+                    \item[1.] Require a model of the environment.
+                    \item[2.] Will predict the future state.
+                \end{itemize}
+        \end{itemize}
+
+    \end{frame}
+
+    \subsubsection*{Q-learning}
+    \begin{frame}
+        \frametitle{\subsubsecname}
+        \begin{itemize}
+            \item Create a Q-table for each state and action.
+            \item Find out the next action to maximizes the Q-value in the Q-table.
+        \end{itemize}
+
+        \begin{figure}
+            \centering
+            \includegraphics[scale=.2]{figs/Qtable.png}
+            \caption{Q-table}
+        \end{figure}
+
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{\subsubsecname}
+
+        The iteration formula for Q-value
+        $$Q^{new}(s_t, a_t) = Q(s_t, a_t) + \alpha(r_t + \gamma\max_{a}Q(s_{t+1}, a))$$
+        The term $r_t$ is the current reward from the environment, and $\max\limits_{a}Q(s_{t+1}, a)$ is the maximum Q-value that can be obtain from next state $s_{t+1}$
+
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{\subsubsecname}
+        \begin{figure}
+            \centering
+            \input{figs/QLearning_flow.tikz}
+            \caption{Q-learning flow chart}
+        \end{figure}
+
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{\subsubsecname}
+        \begin{figure}
+            \centering
+            \input{figs/QLearning_flow_nn.tikz}
+            \caption{Q-learning flow chart using NN}
+        \end{figure}
+
+    \end{frame}
+
+    % ---------- Ecpectation ----------
+    \section{Expectation}
+    \begin{frame}
+        \frametitle{\secname}
+        \begin{itemize}
+            \item[1.] Realize on the inverse pendulum system.
+            \item[2.] Realize on the fix wing UAV.
+            \item[3.] Find more different algorithm.
+        \end{itemize}
+
+    \end{frame}
+
+    % ---------- Q&A ----------
+    \section{Q\&A}
+    \begin{frame}
+
+        \centering
+        \Large Q\&A
+
+    \end{frame}
+
+    % ---------- References ----------
+    \section*{References}
+    \begin{frame}
+        \frametitle{\secname}
+
+        \printbibliography
+
+    \end{frame}
+
+
+\end{document}

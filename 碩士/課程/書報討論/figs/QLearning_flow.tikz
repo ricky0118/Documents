@@ -1,0 +1,28 @@
+%%% ==================== QLearning flow chart ====================
+% The figure of Q-learning flow chart
+% Author: Wu, Po Hsun
+% Date: June 08, 2022
+%
+\tikzstyle{circlenode}=[circle, draw=black, thick, minimum size=1mm]
+\tikzstyle{squarednode}=[rectangle, draw=black, thick, minimum size=0mm, font=\footnotesize]
+
+\begin{tikzpicture}[
+    ->, >={latex},
+    node distance=0.5cm,
+    every state/.style={thick}
+    ]
+    % ---------- Nodes ----------
+    \node[squarednode]  (initialQtable)     []                         {Initialize Q-table};
+    \node[squarednode]  (chooseAction)      [below=of initialQtable]   {Choose a action from Q-table};
+    \node[squarednode]  (obtainState)       [below=of chooseAction]    {Obtain the state from the environment};
+    \node[squarednode]  (measureReward)     [below=of obtainState]     {Measure the reward};
+    \node[squarednode]  (updateQtable)      [below=of measureReward]   {Update Q-table};
+
+    % ---------- Lines ----------
+    \draw[] (initialQtable.south) -- (chooseAction.north);
+    \draw[] (chooseAction.south) -- (obtainState.north);
+    \draw[] (obtainState.south) -- (measureReward.north);
+    \draw[] (measureReward.south) -- (updateQtable.north);
+    \draw[] (updateQtable.south) |- ++(-3,-0.5) |- (chooseAction.west);
+
+\end{tikzpicture}

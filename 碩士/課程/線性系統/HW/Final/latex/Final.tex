@@ -1,0 +1,108 @@
+\documentclass[12pt]{article}
+%%% ========== Package setup ==========
+\usepackage{listings}   % Script listing package
+\usepackage{wrapfig}    % Wrap Figure or table package
+\usepackage{multicol}   % Multicolumn package
+\usepackage{pdfpages}   % Include pdf files
+
+%%% ========== Format setup ==========
+%% Setup chinese words encoder
+\usepackage{xeCJK}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+%% More word fonts
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\renewcommand{\familydefault}{\rmdefault}
+\setCJKmainfont{標楷體}
+
+%% Chinese paragraph format
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+
+%% Page margin
+\usepackage[a4paper, total={6in,8in}]{geometry}
+
+%%% ========== Document ==========
+\begin{document}
+
+\input{./TitlePage.tex}
+\MakeTitlePage{}
+\includepdf[pages=-]{handout.pdf}
+
+\subsection*{\#3(b)(ii)}
+
+\begin{verbatim}
+clear;clc;close all
+theta = linspace(0, 2*pi, 1000);
+y = abs(cos(theta)+2*sin(theta)) + abs(-2*cos(theta)+4*sin(theta));
+figure()
+polarplot(theta, y)
+grid on
+title("||Ax||_1")
+
+y = sqrt((cos(theta)+2*sin(theta)).^2 + (-2*cos(theta)+4*sin(theta)).^2);
+figure()
+polarplot(theta, y)
+grid on
+title("||Ax||_2")
+
+y = max(abs(cos(theta)+2*sin(theta)), abs(-2*cos(theta)+4*sin(theta)));
+figure()
+polarplot(theta, y)
+grid on
+title("||Ax||_\infty")
+\end{verbatim}
+
+\begin{figure}
+    \centering
+
+    \includegraphics [width=4in]{Final_01.png}
+
+    \includegraphics [width=4in]{Final_02.png}
+
+    \includegraphics [width=4in]{Final_03.png}
+\end{figure}
+
+\newpage
+\subsection*{\#3(c)}
+\begin{verbatim}
+clear;clc;close all
+k = 5;
+m = 2;
+q = k/m;
+A = [ 0  0  1  0
+      0  0  0  1
+     -q  q  0  0
+      q -q  0  0];
+STM = @(t) expm(A*t);
+x0 = [0 0 -1 1]';
+
+t = 0:0.01:5;
+x = zeros(length(t), 4);
+for i = 1:length(t)
+    x(i,:) = (STM(t(i))*x0)';
+end
+
+figure()
+plot(t, x(:,1:2))
+legend("y_1", "y_2")
+grid on
+
+figure()
+plot(t, x(:,3:4))
+legend("y_1^\cdot", "y_2^\cdot")
+grid on
+\end{verbatim}
+
+\centering
+
+\includegraphics [width=4in]{Final_04.png}
+
+\includegraphics [width=4in]{Final_05.png}
+
+
+
+\end{document}
+

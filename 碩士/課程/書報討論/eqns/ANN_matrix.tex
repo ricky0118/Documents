@@ -1,0 +1,36 @@
+%%% ==================== ANN matrix form ====================
+% The equation of artificial neural network in matrix form.
+% Author: Wu, Po Hsun
+% Date: May 31, 2022
+%
+\begin{equation}
+    \begin{bmatrix}
+        a_{1}^{(1)} \\
+        a_{2}^{(1)} \\
+        \vdots \\
+        a_{m}^{(1)}
+    \end{bmatrix} = \sigma
+    \begin{pmatrix}
+        \color{black}
+        \begin{bmatrix}
+            w_{1,0} & w_{1,1} & \ldots & w_{1,n} \\
+            w_{2,0} & w_{2,1} & \ldots & w_{2,n} \\
+            \vdots  & \vdots  & \ddots & \vdots  \\
+            w_{m,0} & w_{m,1} & \ldots & w_{m,n}
+        \end{bmatrix}
+        \begin{bmatrix}
+            a_{1}^{(0)} \\
+            a_{2}^{(0)} \\
+            \vdots \\
+            a_{n}^{(0)}
+        \end{bmatrix} +
+        \begin{bmatrix}
+            b_{1}^{(0)} \\
+            b_{2}^{(0)} \\
+            \vdots \\
+            b_{m}^{(0)}
+        \end{bmatrix}
+    \end{pmatrix}
+    \label{eq:ANN_matrix}
+\end{equation}
+

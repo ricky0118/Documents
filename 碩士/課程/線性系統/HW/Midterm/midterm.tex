@@ -1,0 +1,32 @@
+\documentclass[12pt]{article}
+%%% ========== Package setup ==========
+\usepackage{listings}   % Script listing package
+\usepackage{wrapfig}    % Wrap Figure or table package
+\usepackage{multicol}   % Multicolumn package
+\usepackage{pdfpages}   % Include pdf files
+
+%%% ========== Format setup ==========
+%% Setup chinese words encoder
+\usepackage{xeCJK}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+%% More word fonts
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\renewcommand{\familydefault}{\rmdefault}
+\setCJKmainfont{標楷體}
+
+%% Chinese paragraph format
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+
+%% Page margin
+\usepackage[a4paper, total={6in,8in}]{geometry}
+
+%%% ========== Document ==========
+\begin{document}
+    \input{../TitlePage.tex}
+    \MakeTitlePage{Midterm}
+    \includepdf[pages=-]{handout.pdf}
+\end{document}

@@ -1,0 +1,40 @@
+%%% ==================== CC_architecture ====================
+% The figure of Classical Control architecture.
+% Author: Wu, Po Hsun
+% Date: May 28, 2022
+%
+\tikzstyle{circlenode}=[circle, draw=black, thick, minimum size=1mm]
+\tikzstyle{squarednode}=[rectangle, draw=black, thick, minimum size=0mm, font=\footnotesize]
+
+\begin{tikzpicture}[
+    ->, >={latex},
+    node distance=0.5cm,
+    every state/.style={thick}
+    ]
+    % ---------- Nodes ----------figs/CC_architecture.tikz
+    \node[]             (input)                                 {$r(t)$};
+    \node[circlenode]   (sum)           [right=of input]        {};
+    \node[squarednode]  (controller)    [right=of sum]          {Controller};
+    \node[squarednode]  (plane)         [right=of controller]   {Plane};
+    \node[]             (output)        [right=of plane]        {$y(t)$};
+
+    % ---------- Lines ----------
+    \draw[] (input.east) -- (sum.west);
+    \draw[] (sum.east) -- (controller.west);
+    \draw[] (controller.east) -- (plane.west);
+    \draw[] ($(plane.east)+(0.2,0)$) -- ++(0,-1) -| ($(sum.south)$);
+    \draw[] (plane.east) -- (output.west);
+
+    % ---------- Symbols ----------
+    \node[right] at ($(sum.south)+(0,-0.2)$)    {$-$};
+    \node[above] at ($(sum.west)+(-0.2,0)$)     {$+$};
+    \node[above] at ($(sum.east)+(0.2,0)$)      {$e(t)$};
+
+    % ---------- Legend ----------
+    \node[right, align=left] at (output.east) {
+        $r(t)$: reference \\
+        $y(t)$: state \\
+        $e(t)$: error
+    };
+
+\end{tikzpicture}

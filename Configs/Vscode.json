@@ -1,54 +1,63 @@
 {
-    // User Settings
-
-    "window.zoomLevel": 2,
-    // "editor.lineHeight": 26,
-    // "terminal.integrated.fontSize": 30, // terminal 字體大小
-    // "editor.formatOnSave": true, // 當儲存時，是否自動格式化
-    "files.autoSave": "onFocusChange", // 是否自動儲存檔案
+    // ========================================
+    // ======== User setup ========
+    // editor setup
+    "editor.fontSize": 16,
     "editor.minimap.enabled": false,
-
-    // 注意，win 用戶都要使用 "\\"
-    // "python.pythonPath": "C:\\Users\\ricky\\Anaconda3\\envs\\common", // 預設的 PYTHON 執行環境
-
-    "python.terminal.activateEnvironment": true, // 自動啟動環境
-    "python.linting.pylintEnabled": true,  // 需要 pip install pylint
-    "python.linting.enabled": true,  // 需要 pip install pylint
-
-    "extensions.ignoreRecommendations": true, // 是否忽略顯示建議的套件
-    "files.encoding": "utf8", // 設定預設編碼
+    "editor.wordWrap": "on",
+    // "editor.formatOnSaveMode": "file",
+    // "editor.formatOnSave": true,
+    // "editor.codeActionsOnSave": {
+    //     "source.organizeImports": true
+    // },
+    // "prettier.printWidth": 80,
+    "files.autoSave": "onFocusChange", // 自動儲存檔案
+    "files.encoding": "utf8", // 設定預設編碼格式
     "files.trimTrailingWhitespace": true, // 儲存的時候，會幫你自動過濾多餘的空格
-    "files.autoGuessEncoding": false, // 是否自動猜測檔案的編碼
-    // "terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-    // "workbench.welcome.enabled": false, // 使否關閉 vscode 歡迎的顯示頁面
+    "files.autoGuessEncoding": false, // 自動猜測檔案的編碼
+    "files.associations": {
+        "*.tikz": "latex"
+    },
+    "explorer.confirmDragAndDrop": false, // 彈出確認視窗
+    // theme setup
     "workbench.startupEditor": "none",
     "workbench.iconTheme": "vscode-icons",
-    "terminal.integrated.rendererType": "dom",
-    "explorer.confirmDragAndDrop": false,
-    "terminal.integrated.inheritEnv": false,
-    "vsicons.dontShowNewVersionMessage": true,
+    // git setup
     "git.enableSmartCommit": true,
-    // "workbench.editorAssociations": [
-    //     {
-    //         "viewType": "jupyter.notebook.ipynb",
-    //         "filenamePattern": "*.ipynb"
-    //     }
-    // ],
+    // terminal setup
+    "terminal.integrated.fontSize": 16, // terminal 字體大小
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "terminal.integrated.inheritEnv": true,
+    // not importent setting
+    "vsicons.dontShowNewVersionMessage": true,
+    "extensions.ignoreRecommendations": true, // 是否忽略顯示建議的套件
     "kite.showWelcomeNotificationOnStartup": false,
-    "editor.wordWrap": "on",
+    "vim.smartRelativeLine": true,
 
+    // ========================================
+    // ======== Python setup ========
+    "python.defaultInterpreterPath": "C:\\Users\\ricky\\AppData\\Local\\Programs\\Python\\env\\Global",
+    "python.terminal.activateEnvironment": true, // 自動啟動環境
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintArgs": [
+        "--disable=C0103"
+    ],
+    "python.analysis.typeCheckingMode": "basic",
+    "python.formatting.provider": "black",
+
+    // ========================================
     // ======== Latex setup ========
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.latex.autoBuild.run": "onSave",
+    "latex-workshop.latex.autoClean.run": "onBuilt",
+    "latex-workshop.synctex.afterBuild.enabled": true,
     "latex-workshop.latex.recipes": [
         {
-            "name": "xelatex",
+            "name": "xelatex*2",
             "tools": [
+                "xelatex",
                 "xelatex"
-            ]
-        },
-        {
-            "name": "pdflatex",
-            "tools": [
-                "pdflatex"
             ]
         },
         {
@@ -66,6 +75,12 @@
                 "pdflatex",
                 "bibtex",
                 "pdflatex",
+                "pdflatex"
+            ]
+        },
+        {
+            "name": "pdflatex",
+            "tools": [
                 "pdflatex"
             ]
         }
@@ -92,22 +107,96 @@
             "name": "pdflatex",
             "command": "C:\\texlive\\2021\\bin\\win32\\pdflatex",
             "args": [
-            "-synctex=1",
-            "-interaction=nonstopmode",
-            "-file-line-error",
-            "%DOC%"
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
             ]
         }
     ],
-    "latex-workshop.view.pdf.viewer": "tab",
-    "latex-workshop.latex.autoBuild.run": "onSave",
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter-notebook"
-    },
-    "python.defaultInterpreterPath": "C:\\Users\\ricky\\Anaconda3\\envs\\common",
-    "notebook.cellToolbarLocation": {
-        "default": "right",
-        "jupyter-notebook": "left"
-    }
+    "latex-workshop.latex.clean.fileTypes": [
+        "*.aux",
+        "*.bbl",
+        "*.blg",
+        "*.idx",
+        "*.ind",
+        "*.lof",
+        "*.lot",
+        "*.out",
+        "*.toc",
+        "*.acn",
+        "*.acr",
+        "*.alg",
+        "*.glg",
+        "*.glo",
+        "*.gls",
+        "*.fls",
+        "*.log",
+        "*.fdb_latexmk",
+        "*.snm",
+        "*.synctex(busy)",
+        "*.synctex.gz(busy)",
+        "*.nav",
+        "*.vrb",
+        "*.synctex.gz",
+        "*.bcf",
+        "*.run.xml",
+        "*-blx.bib"
+    ],
 
+    // ========================================
+    // ======== TODO tree setup ========
+    "todo-tree.tree.autoRefresh": true,
+    "todo-tree.highlights.customHighlight": {
+        "WARN": {
+            "foreground": "white",
+            "background": "red",
+            "iconColour": "red",
+            "icon": "alert",
+            "type": "text"
+        },
+        "TODO": {
+            "foreground": "black",
+            "background": "green",
+            "iconColour": "green",
+            "icon": "check",
+            "type": "text"
+        },
+        "FIXME": {
+            "foreground": "black",
+            "background": "red",
+            "iconColour": "red",
+            "icon": "bug"
+        },
+        "REVIEW": {
+            "foreground": "black",
+            "background": "cyan",
+            "iconColour": "lightblue",
+            "icon": "eye"
+        },
+        "HACK": {
+            "foreground": "black",
+            "background": "#FFA500",
+            "iconColour": "orange",
+            "icon": "alert"
+        },
+        "REF": {
+            "foreground": "black",
+            "background": "grey",
+            "iconColour": "grey",
+            "icon": "link",
+            "type": "tag"
+        }
+    },
+    "todo-tree.highlights.defaultHighlight": {
+        "type": "text-and-comment"
+    },
+    "todo-tree.general.tags": [
+        "TODO",
+        "FIXME",
+        "REVIEW",
+        "HACK",
+        "REF",
+        "WARN"
+    ],
 }

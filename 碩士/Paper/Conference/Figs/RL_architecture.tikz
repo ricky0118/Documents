@@ -1,0 +1,42 @@
+%%% ==================== RLC_architecture ====================
+% The figure of Reinforcement Learning architecture.
+% Author: Wu, Po Hsun
+% Date: August 30, 2022
+%
+\tikzstyle{circlenode}=[circle, draw=black, thick, minimum size=1mm, align=center]
+\tikzstyle{squarednode} = [
+    rectangle,
+    rounded corners=8pt,
+    draw=black,
+    ultra thick,
+    minimum size=1mm,
+    align=center,
+    inner sep=2mm
+]
+
+\begin{tikzpicture}[
+    ->, >={latex},
+    node distance=1.5cm,
+    very thick,
+    align=center
+    ]
+    % ---------- Nodes ----------
+    \node[squarednode]                  (policy)                                {Policy};
+    \node[squarednode, text width=3cm]  (RL_algo)       [below=of policy]       {Reinforcement learning algorithm};
+    \node[squarednode]                  (env)           [below=of RL_algo]      {Environment};
+
+    % ---------- Lines ----------
+    \draw[] (policy.east) -- ++(3,0) |- (env.east);
+    \draw[] (env.west) -- ++(-2.5,0) |- (policy.west);
+    \draw[] (env.north) -- (RL_algo.south);
+    \draw[] (RL_algo) -- (policy.south);
+    \draw[] (policy.west)+(-1.5,0) |- (RL_algo);
+    \draw[] (policy.east)+(1.5,0) |- (RL_algo);
+
+    % ---------- Symbols ----------
+    \node[right] at ($(policy.east)+(0.5,0.3)$)   {Action$(a_t)$};
+    \node[left]  at ($(policy.west)+(-0.5,0.3)$)  {State$(s_t)$};
+    \node[above] at ($(env.north)+(1,0.2)$)       {Reward$(r_t)$};
+    \node[above, text width=2cm] at ($(RL_algo.north)+(0.7,0.1)$)   {Policy Update};
+
+\end{tikzpicture}

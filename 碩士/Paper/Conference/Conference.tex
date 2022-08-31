@@ -1,5 +1,5 @@
 \documentclass[a4paper, onecolumn, 11pt, AutoFakeBold]{article}
-%%% ========== Package setup ==========
+%%% ==================== Package setup ====================
 \usepackage{listings}       % Script listing package
 \usepackage{wrapfig}        % Wrap Figure or table package
 \usepackage{multicol}       % Multicolumn package
@@ -14,6 +14,7 @@
 \usepackage{float}          % For figure [H] parameter place the graph
 \usepackage[backend=bibtex, style=ieee]{biblatex} % Biblatex reference package(Docs: https://distrib-coffee.ipsl.jussieu.fr/pub/mirrors/ctan/macros/latex/contrib/biblatex/doc/biblatex.pdf, Cheat Sheet: https://ftp.ntou.edu.tw/ctan/info/biblatex-cheatsheet/biblatex-cheatsheet.pdf)
 
+\usepackage{tikz}       % TikZ picture package(Docs: https://ftp.ntou.edu.tw/ctan/graphics/pgf/base/doc/pgfmanual.pdf)
 % \usepackage{parskip}
 \usepackage{blindtext}
 
@@ -28,6 +29,11 @@
 %%% ==================== Setting setup ====================
 % ---------- Figure path ----------
 \graphicspath{{./Figs/}}
+
+% TikZ setting
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
 
 % Biblatex setting
 \addbibresource{refs.bib}
@@ -103,11 +109,11 @@
 \begin{abstract} \textpt{11}
 本研究採用強化學習實現無人機的姿態控制，利用OpenAI GYM package建立強化學習的環境後，再使用強化學習演算法與Python/Tensorflow對環境進行學習。
 \end{abstract}
-\bigskip
+\smallskip
 
 % ---------- Keywords ----------
 關鍵字：無人飛行載具、強化學習、OpenAI GYM、Python/Tensorflow
-\bigskip
+\smallskip
 
 %%% ==================== Content ====================
 \begin{multicols*}{2}
@@ -116,46 +122,58 @@
 \section{緒論}
 \subsection{研究動機}
 \par
-近年來機器學習技術日漸成熟和電腦運算速度的提升，機器學習開始大量的應用於影像辨識、自然語言處理、文本分析......等領域，透過大量的訓練資料和機器學習演算法來訓練模型使其達成我們所希望達到的目標。
+近年來機器學習技術日漸成熟和電腦運算速度的提升，機器學習開始大量的應用於影像辨識、自然語言處理、文本分析…等領域，透過大量的訓練資料和機器學習演算法來訓練模型使其達成我們所希望達到的目標。
 \par
-而在控制領域通常都需要將非線性的模型線性化後，再運用PID或LQR...等方法來設計出控制器，而設計出的控制器也會因為線性化模型的緣故，在遠離平衡點時，容易與真實狀況不符合導致系統發散。
+而在控制領域通常都需要將非線性的模型線性化後，再運用PID或LQR…等方法來設計出控制器，而設計出的控制器也會因為線性化模型的緣故，在遠離平衡點時，容易與真實狀況不符合導致系統發散。
 \par
 若我們利用機器學習演算法針對非線性的數學模型於電腦上進行大量模擬和訓練，即可得到一個以神經網路為基礎的控制器，也因為在訓練的過程中使用的模型是非線性的，所以在狀態遠離平衡點後就使控制器無法有效的達到目標。
 
-\bigskip
+\smallskip
 \subsection{文獻回顧}
 \cite{Flight_Controller_Synthesis_Via_Deep_Reinforcement_Learning}
 \cite{Reinforcement_Learning_for_UAV_Attitude_Control}
+\cite{Optimal_Sliding_Mode_Controller_for_Fixed-wing_UAV}
 
-\bigskip
+\blindtext
+
+\smallskip
 \subsection{研究方法}
+\par
+本研究是利用強化學習演算法來訓練決策使其可以有效的控制無人機的姿態，首先利用Python/Tensorflow建立一個神經網路來作為產生動作的決策，再使用OpenAI GYM架構建立強化學習的環境，而無人機的動態模擬是使用文獻\cite{Optimal_Sliding_Mode_Controller_for_Fixed-wing_UAV}所計算出的動態方程式進行建模，最後利用強化學習演算法蒐集決策與環境間互動的資料進行計算，最終神經網路藉由改變神經網路的參數來最佳化獎勵函數來達到我們控制無人機姿態的目標。
 
-\bigskip
+\smallskip
 % ---------- Reinforcement learning ----------
 \section{強化學習}
 \subsection{介紹}
 \par
 強化學習(Reinforcement learning, RL)屬於機器學習的一種，與其他機器學習方法不同的是，強化學習是基於與環境(Environment)進行互動來獲得獎勵(Reward)，藉由強化學習演算法改善決策(Policy)最終得到一個能夠最大化獎勵函數的決策。
+\par
+如\figref{fig:RL_architecture}，強化學習主要由決策、環境和演算法組成，決策會從環境中獲得狀態(State)後，根據不同的狀態反饋給環境不同的動作(Action)，而環境得到決策所給予的動作後，也會計算出下一個狀態和獎勵值給予決策，而演算法會去蒐集每個時間下的狀態、動作和獎勵值，藉由獎勵值的大小來改變決策，獎勵值大的動作會使決策增加該動作的出現機率，反之，獎勵值小的動作則會減小決策執行該動作的機率，藉由大量的學習的過程使每次的動作都能產生最大的獎勵值。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\figwidth]{RL_architecture.png}
+    \input{./Figs/RL_architecture.tikz}
     \caption{強化學習架構}
     \label{fig:RL_architecture}
 \end{figure}
 
-\bigskip
+\smallskip
+\subsection{PPO演算法}
+\par
+PPO演算法(Proximal Policy Optimization alogrithm)是由OpenAI於2017年提出的演算法，PPO是由TRPO(Trust region policy optimization)將最佳化問題簡化後所得出，經文獻\cite{PPO_algorithms}證實PPO演算法具有TRPO，而在文獻\cite{PPO_algorithms}的結果裡，PPO演算法比起其他種強化學習的演算法具有更好的整體性能。
+
+\smallskip
 % ---------- Modeling and training ----------
 \section{建模與訓練}
 \subsection{OpenAI GYM}
 
-\bigskip
+\smallskip
 \subsection{訓練結果}
 
-\bigskip
+\smallskip
 % ---------- Conclusion ----------
 \section{結論}
 
-\bigskip
+\smallskip
 % ---------- Refrence ----------
 \titleformat{\section}{\bfseries\texttwelve}{\xCJKnumber{\thesection}、}{0em}{}
 \printbibliography[title=\texttwelve{參考文獻}]

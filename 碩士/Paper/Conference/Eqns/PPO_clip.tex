@@ -1,0 +1,13 @@
+%%% ==================== PPO clip method ====================
+% The equation of PPO using clip method.
+% Author: Wu, Po Hsun
+% Date: September 03, 2022
+%
+\begin{equation} \label{eqn:PPO_clip}
+\begin{aligned}
+    \min_\theta\ \hat{\mathbb{E}}_t [\min(&k_t(\theta)\hat{A}_t,\,\\
+    &\text{clip}(k_t(\theta),\, 1-\epsilon,\, 1+\epsilon)\hat{A}_t)]
+    % & \text{where}\ k_t(\theta)=\frac{\pi_{\theta}(a_t|s_t)}{\pi_{\theta_\text{old}}(a_t|s_t)}
+\end{aligned}
+\end{equation}
+

@@ -17,6 +17,8 @@
 \usepackage{tikz}       % TikZ picture package(Docs: https://ftp.ntou.edu.tw/ctan/graphics/pgf/base/doc/pgfmanual.pdf)
 % \usepackage{parskip}
 \usepackage{blindtext}
+\usepackage{amsmath}
+\usepackage{amssymb}
 
 %%% ==================== Command setup ====================
 \newcommand{\textten}{\fontsize{10}{10}\selectfont}
@@ -25,11 +27,9 @@
 \newcommand{\textpt}[1]{\fontsize{#1}{#1}\selectfont}
 \newcommand{\figref}[1]{圖\ref{#1}}
 \newcommand{\figwidth}{2.5in}
+\renewcommand{\eqref}[1]{式(\ref{#1})}
 
 %%% ==================== Setting setup ====================
-% ---------- Figure path ----------
-\graphicspath{{./Figs/}}
-
 % TikZ setting
 \usetikzlibrary{positioning}
 \usetikzlibrary{calc}
@@ -139,7 +139,7 @@
 \smallskip
 \subsection{研究方法}
 \par
-本研究是利用強化學習演算法來訓練決策使其可以有效的控制無人機的姿態，首先利用Python/Tensorflow建立一個神經網路來作為產生動作的決策，再使用OpenAI GYM架構建立強化學習的環境，而無人機的動態模擬是使用文獻\cite{Optimal_Sliding_Mode_Controller_for_Fixed-wing_UAV}所計算出的動態方程式進行建模，最後利用強化學習演算法蒐集決策與環境間互動的資料進行計算，最終神經網路藉由改變神經網路的參數來最佳化獎勵函數來達到我們控制無人機姿態的目標。
+本研究是利用強化學習演算法來訓練決策使其可以有效的控制無人機的姿態，首先利用Python/Tensorflow建立一個神經網路來作為產生動作的決策，而無人機的動態模擬是使用文獻\cite{Optimal_Sliding_Mode_Controller_for_Fixed-wing_UAV}所計算出的動態方程式和四階Runge-Kutta法進行模擬，再利用OpenAI GYM將模擬包裝成強化學習的標準環境，最後利用強化學習演算法蒐集決策與環境間互動的資料進行計算，最終神經網路藉由改變神經網路的參數來最佳化獎勵函數來達到我們控制無人機姿態的目標。
 
 \smallskip
 % ---------- Reinforcement learning ----------
@@ -159,12 +159,27 @@
 \smallskip
 \subsection{PPO演算法}
 \par
-PPO演算法(Proximal Policy Optimization alogrithm)是由OpenAI於2017年提出的演算法，PPO是由TRPO(Trust region policy optimization)將最佳化問題簡化後所得出，經文獻\cite{PPO_algorithms}證實PPO演算法具有TRPO，而在文獻\cite{PPO_algorithms}的結果裡，PPO演算法比起其他種強化學習的演算法具有更好的整體性能。
+PPO演算法(Proximal Policy Optimization alogrithm)是由OpenAI於2017年提出的演算法，PPO是基於TRPO演算法(Trust region policy optimization)改善而來，經文獻\cite{PPO_algorithms}證實PPO演算法具有TRPO的效能和強健性，而在文獻\cite{PPO_algorithms}的結果裡PPO演算法比起其他種強化學習的演算法具有更好的整體性能。
+\par
+在TRPO中，將最佳化的目標函數定義為\eqref{eqn:TRPO_optimal_max}和\eqref{eqn:TRPO_optimal_sub}
+\input{Eqns/TRPO_optimal.tex}
+\noindent 在\eqref{eqn:TRPO_optimal_max}中，$\hat{\mathbb{E}}_t[\,\cdot\,]$代表某個路徑上的期望值平均函數，$\hat{A}_t$則是在某時間的優勢函數表示為\eqref{eqn:Advance_function}
+\input{Eqns/advance_function.tex}
+\noindent 其中$r_t$為在某時間下的獎勵值；而在\eqref{eqn:TRPO_optimal_sub}中，$\text{KL}[\,\cdot\,]$是KL散度(Kullback-Leibler divergence)代表當前的決策和舊的決策之間的差異必須小於$\delta$。
+\par
+因為TRPO演算法中的約束條件為強約束條件，再加上KL散度難以估算，使TRPO演算法需要消耗更多的時間才能有較好的結果，所以在文獻\cite{PPO_algorithms}中提出將最佳化問題轉換為\eqref{eqn:PPO_clip}
+\input{Eqns/PPO_clip.tex}
+\noindent 其中$k_t(\theta)=\frac{\pi_{\theta}(a_t|s_t)}{\pi_{\theta_\text{old}}(a_t|s_t)}$，而clip函數限制了機率比值的上下限在$\left[1-\epsilon, 1+\epsilon\right]$之間，使其簡化\eqref{eqn:TRPO_optimal_sub}避免計算KL散度又可以限制新舊決策間的差異，使PPO演算法可以具有TRPO的特性又可以強化收斂時的效率。
 
 \smallskip
 % ---------- Modeling and training ----------
 \section{建模與訓練}
-\subsection{OpenAI GYM}
+\subsection{OpenAI GYM建模}
+\par
+OpenAI GYM是一個廣泛應用於建構強化學習環境的API，OpenAI GYM提供一個標準化的環境架構給開發者進行強化學習環境的建構，使在學習的期間能夠更穩定的進行模擬與學習。
+\par
+OpenAI GYM主要由兩個函數組成，一個是Step函數，該函數是將動作(Action)作為輸入後，將下一個狀態(State)、該動作的獎勵(Reward)、是否終止(Done)和其他資訊(Info)四者作為輸出，另一個則是Reset函數，該函數是將所有先前模擬的變數進行初始化後，生成一個隨機的初始狀態後，將該狀態進行輸出作為該次模擬的起始。
+\par
 
 \smallskip
 \subsection{訓練結果}

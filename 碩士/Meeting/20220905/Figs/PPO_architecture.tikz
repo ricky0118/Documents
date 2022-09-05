@@ -1,0 +1,53 @@
+%%% ==================== RLC_architecture ====================
+% The figure of Reinforcement Learning policy architecture.
+% Author: Wu, Po Hsun
+% Date: May 28, 2022
+%
+\tikzstyle{circlenode}=[circle, draw=black, thick, minimum size=1mm]
+\tikzstyle{squarednode}=[rectangle, draw=black, thick, minimum size=0mm, font=\footnotesize]
+
+\begin{tikzpicture}[
+    ->, >={latex},
+    node distance=0.5cm,
+    every state/.style={thick}
+    ]
+    % ---------- Nodes ----------
+    \node[]             (input)                                 {$r(t)$};
+    \node[circlenode]   (sum)           [right=of input]        {};
+    \node[squarednode]  (policy)        [right=of sum]          {Neural Network};
+    \node[squarednode]  (sampler)       [right=of policy]       {sampler};
+    \node[squarednode]  (plane)         [right=of sampler]      {Plane};
+    \node[]             (output)        [right=of plane]        {$y(t)$};
+    \node[squarednode]  (RL_algorithm)  [above=of policy]       {RL Algorithm};
+
+    % ---------- Lines ----------
+    \draw[] (input.east) -- (sum.west);
+    \draw[] (sum.east) -- (policy.west);
+    \draw[] (policy.east) -- (sampler.west);
+    \draw[] (sampler.east) -- (plane.west);
+    \draw[] ($(plane.east)+(0.2,0)$) -- ++(0,-1) -| ($(sum.south)$);
+    \draw[] (plane.east) -- (output.west);
+
+    \draw[] (RL_algorithm.south) -- (policy.north);
+    \draw[] (plane.north) |- (RL_algorithm.east);
+    \draw[] ($(sum.east)+(0.2,0)$) |- (RL_algorithm.west);
+
+    % ---------- Symbols ----------
+    \node[right] at ($(sum.south)+(0,-0.2)$)            {$-$};
+    \node[above] at ($(sum.west)+(-0.2,0)$)             {$+$};
+    \node[above] at ($(RL_algorithm.east)+(0.4,0)$)     {$R(t)$};
+    \node[above] at ($(RL_algorithm.west)+(-0.4,0)$)    {$e(t)$};
+    \node[above] at ($(policy.east)+(0.4,0.2)$)           {$p(t)$};
+    \node[above] at ($(sampler.east)+(0.4,0.2)$)          {$u(t)$};
+
+    % ---------- Legend ----------
+    \node[right, align=left] at (output.east) {
+        $r(t)$: reference \\
+        $y(t)$: state \\
+        $e(t)$: error \\
+        $R(t)$: reward \\
+        $p(t)$: probability \\ \hspace{2em} of actions \\
+        $u(t)$: control
+    };
+
+\end{tikzpicture}

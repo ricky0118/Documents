@@ -1,0 +1,40 @@
+%%% ==================== Dynamic model ====================
+% The equation of Dynamic model.
+% Author: Wu, Po Hsun
+% Date: September 06, 2022
+%
+\begin{gather}
+    \begin{aligned}
+    \begin{bmatrix}
+    \Delta \dot{\beta} \\
+    \Delta \dot{p} \\
+    \Delta \dot{r} \\
+    \Delta \dot{\phi}
+    \end{bmatrix}  =
+    &\begin{bmatrix}
+    - 0.3981  & - 0.0144 & -0.9626 & 0.9307 \\
+    -24.9043  & -10.2554 &  3.2605 & 0 \\
+      7.5320  & - 0.1847 & -0.7085 & 0 \\
+      0       &   1      &  0      & 0
+    \end{bmatrix}
+    \begin{bmatrix}
+    \Delta \beta \\
+    \Delta p \\
+    \Delta r  \\
+    \Delta \phi
+    \end{bmatrix} \\
+    & +
+    \begin{bmatrix}
+     0       &  0.0080 \\
+    -2.3713  &  0.0699 \\
+     0.1870  & -0.5106 \\
+     0       &  0
+    \end{bmatrix}
+    \begin{bmatrix}
+    \Delta \delta_a \\
+    \Delta \delta_r
+    \end{bmatrix}
+    \label{eqn:Dynamic_model}
+    \end{aligned}
+\end{gather}
+

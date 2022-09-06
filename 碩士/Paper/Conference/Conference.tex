@@ -19,6 +19,7 @@
 \usepackage{blindtext}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{resizegather}
 
 %%% ==================== Command setup ====================
 \newcommand{\textten}{\fontsize{10}{10}\selectfont}
@@ -161,7 +162,7 @@
 \par
 PPO演算法(Proximal Policy Optimization alogrithm)是由OpenAI於2017年提出的演算法，PPO是基於TRPO演算法(Trust region policy optimization)改善而來，經文獻\cite{PPO_algorithms}證實PPO演算法具有TRPO的效能和強健性，而在文獻\cite{PPO_algorithms}的結果裡PPO演算法比起其他種強化學習的演算法具有更好的整體性能。
 \par
-在TRPO中，將最佳化的目標函數定義為\eqref{eqn:TRPO_optimal_max}和\eqref{eqn:TRPO_optimal_sub}
+在TRPO中，將最佳化的目標函數定義為\eqref{eqn:TRPO_optimal_max}，而約束條件定義為\eqref{eqn:TRPO_optimal_sub}
 \input{Eqns/TRPO_optimal.tex}
 \noindent 在\eqref{eqn:TRPO_optimal_max}中，$\hat{\mathbb{E}}_t[\,\cdot\,]$代表某個路徑上的期望值平均函數，$\hat{A}_t$則是在某時間的優勢函數表示為\eqref{eqn:Advance_function}
 \input{Eqns/advance_function.tex}
@@ -173,13 +174,18 @@ PPO演算法(Proximal Policy Optimization alogrithm)是由OpenAI於2017年提出
 
 \smallskip
 % ---------- Modeling and training ----------
-\section{建模與訓練}
-\subsection{OpenAI GYM建模}
+\section{環境與建模與訓練}
+\subsection{無人機建模}
+在本研究中是使用文獻\cite{Optimal_Sliding_Mode_Controller_for_Fixed-wing_UAV}中的橫向向動態方程式進行初步的驗證，如\eqref{eqn:Dynamic_model}
+\input{Eqns/Dynamic_model.tex}
+ㄞ
+
+\subsection{OpenAI GYM環境}
 \par
 OpenAI GYM是一個廣泛應用於建構強化學習環境的API，OpenAI GYM提供一個標準化的環境架構給開發者進行強化學習環境的建構，使在學習的期間能夠更穩定的進行模擬與學習。
 \par
-OpenAI GYM主要由兩個函數組成，一個是Step函數，該函數是將動作(Action)作為輸入後，將下一個狀態(State)、該動作的獎勵(Reward)、是否終止(Done)和其他資訊(Info)四者作為輸出，另一個則是Reset函數，該函數是將所有先前模擬的變數進行初始化後，生成一個隨機的初始狀態後，將該狀態進行輸出作為該次模擬的起始。
-\par
+OpenAI GYM主要由兩個函數組成，一個是Step函數，該函數是將動作(Action)作為輸入後，將下一個狀態(State)、該動作的獎勵(Reward)、是否終止(Done)和其他資訊(Info)四者作為輸出，
+\noindent 另一個則是Reset函數，該函數是將所有先前模擬的變數進行初始化後，生成一個隨機的初始狀態後，將該狀態進行輸出作為該次模擬的起始。
 
 \smallskip
 \subsection{訓練結果}
@@ -190,8 +196,8 @@ OpenAI GYM主要由兩個函數組成，一個是Step函數，該函數是將動
 
 \smallskip
 % ---------- Refrence ----------
-\titleformat{\section}{\bfseries\texttwelve}{\xCJKnumber{\thesection}、}{0em}{}
-\printbibliography[title=\texttwelve{參考文獻}]
+\titleformat{\section}{\bfseries\texttwelve}{}{0em}{}
+\printbibliography[title={參考文獻}]
 
 \end{multicols*}
 \end{document}

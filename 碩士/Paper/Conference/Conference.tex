@@ -173,6 +173,15 @@ PPO演算法(Proximal Policy Optimization alogrithm)是由OpenAI於2017年提出
 \noindent 其中$k_t(\theta)=\frac{\pi_{\theta}(a_t|s_t)}{\pi_{\theta_\text{old}}(a_t|s_t)}$，而clip函數限制了機率比值的上下限在$\left[1-\epsilon, 1+\epsilon\right]$之間，使其簡化\eqref{eqn:TRPO_optimal_sub}避免計算KL散度又可以限制新舊決策間的差異，使PPO演算法可以具有TRPO的特性又可以強化收斂時的效率。
 
 \smallskip
+\subsection{獎勵函數}
+\par
+在強化學習中獎勵函數的設計佔據了很重要的一部份，獎勵函數若設計的好可以使訓練出的決策更快的達成目標，而獎勵函數的目的是將決策與環境的互動狀況用數學函數來表達，好的動作則給予較高的獎勵，也會使演算法在更新決策時會使決策增加好的動作出現的機率。
+\par
+在本研究中參考了GYM預設環境的獎勵函數的定義方式，該函數是定義了狀態的上下限，若決策可以將狀態維持在某個區間內則可以獲得獎勵，反之，若決策的動作有機會使狀態離開該區間，則在離開該區間後則無法獲得獎勵，表示為數學形式則為\eqref{eqn:Reward_function}
+\input{Eqns/Reward_function.tex}
+\noindent
+
+\smallskip
 % ---------- Modeling and training ----------
 \section{環境與建模與訓練}
 \subsection{無人機建模}
@@ -184,7 +193,7 @@ PPO演算法(Proximal Policy Optimization alogrithm)是由OpenAI於2017年提出
 \par
 OpenAI GYM是一個廣泛應用於建構強化學習環境的API，OpenAI GYM提供一個標準化的環境架構給開發者進行強化學習環境的建構，使在學習的期間能夠更穩定的進行模擬與學習。
 \par
-OpenAI GYM主要由兩個函數組成，一個是Step函數，該函數是將動作(Action)作為輸入後，將下一個狀態(State)、該動作的獎勵(Reward)、是否終止(Done)和其他資訊(Info)四者作為輸出，
+OpenAI GYM主要由兩個函數組成，一個是Step函數，該函數是將動作(Action)作為輸入後，經過動態方程式和獎勵函數計算後，將下一個狀態(State)、該動作的獎勵(Reward)、是否終止(Done)和其他資訊(Info)四者作為輸出，
 \noindent 另一個則是Reset函數，該函數是將所有先前模擬的變數進行初始化後，生成一個隨機的初始狀態後，將該狀態進行輸出作為該次模擬的起始。
 
 \smallskip

@@ -1,0 +1,161 @@
+{
+	"slide_header": {
+		"prefix": "slide header",
+		"body": [
+			"\\documentclass{beamer}",
+			"%%% ========== Package setup ==========",
+			"\\usepackage{xeCJK}      % Chinese words package",
+			"\\usepackage{fontspec}   % Word fonts package",
+			"\\usepackage{listings}   % Wrap Figure or table package",
+			"\\usepackage{wrapfig}    % Multicolumn package",
+			"\\usepackage{multicol}   % Multicolumn package",
+			"\\usepackage{pdflscape}  % Landscpae package",
+			"\\usepackage{hyperref}   % Hyperlink package",
+			"\\usepackage{tikz}       % TikZ picture package(Docs: https://ftp.ntou.edu.tw/ctan/graphics/pgf/base/doc/pgfmanual.pdf)",
+			"\\usepackage[backend=bibtex, style=ieee]{biblatex} % Biblatex reference package(Docs: https://distrib-coffee.ipsl.jussieu.fr/pub/mirrors/ctan/macros/latex/contrib/biblatex/doc/biblatex.pdf, Cheat Sheet: https://ftp.ntou.edu.tw/ctan/info/biblatex-cheatsheet/biblatex-cheatsheet.pdf)",
+			"",
+			"\\usepackage[outline]{contour} % glow around text",
+			"\\usepackage{amsmath}",
+			"\\usepackage{mathtools}",
+			"",
+			"%%% ========== Slide setting ==========",
+			"%% Slide theme setup",
+			"\\usetheme{CambridgeUS}",
+			"\\usecolortheme{wolverine}",
+			"",
+			"%% Setup chinese words encoder",
+			"\\XeTeXlinebreaklocale \"zh\"",
+			"\\XeTeXlinebreakskip = 0pt plus 1pt",
+			"",
+			"%% More word fonts",
+			"\\setmainfont{Times New Roman}",
+			"\\renewcommand{\\familydefault}{\\rmdefault}",
+			"\\setCJKmainfont{標楷體}",
+			"",
+			"% Setting for figure and table numbering",
+			"\\setbeamertemplate{caption}[numbered]",
+			"",
+			"% TikZ setting",
+			"\\usetikzlibrary{positioning}",
+			"\\usetikzlibrary{calc}",
+			"\\usetikzlibrary{arrows.meta}",
+			"",
+			"% Biblatex setting",
+			"\\addbibresource{refs.bib}",
+			"\\ExecuteBibliographyOptions{eprint=false}",
+			"\\ExecuteBibliographyOptions{url=false}",
+			"",
+			"%%% ========== Title setup ==========",
+			"\\date{$CURRENT_MONTH_NAME $CURRENT_DATE, $CURRENT_YEAR}",
+			"\\title{${1:title}}",
+			"\\author{Po Hsun Wu}",
+			"\\institute[]{\\emph{Department of Aerospace Engineering\\\\ Tamkang University}}",
+			"\\logo{\\includegraphics[height=1.5cm]{figs/watermark_tku.eps}}",
+			"",
+			"%%% ========== Document ==========",
+			"\\begin{document}",
+			"\t\\maketitle",
+			"",
+			"\t$0",
+			"",
+			"\\end{document}"
+		]
+	},
+
+	"doc_header": {
+		"prefix": "document header",
+		"body": [
+			"\\documentclass[12pt]{article}",
+			"%%% ========== Package setup ==========",
+			"\\usepackage{listings}   % Script listing package",
+			"\\usepackage{wrapfig}    % Wrap Figure or table package",
+			"\\usepackage{multicol}   % Multicolumn package",
+			"\\usepackage{pdfpages}   % Include pdf files",
+			"",
+			"%%% ========== Format setup ==========",
+			"%% Setup chinese words encoder",
+			"\\usepackage{xeCJK}",
+			"\\XeTeXlinebreaklocale \"zh\"",
+			"\\XeTeXlinebreakskip = 0pt plus 1pt",
+			"",
+			"%% More word fonts",
+			"\\usepackage{fontspec}",
+			"\\setmainfont{Times New Roman}",
+			"\\renewcommand{\\familydefault}{\\rmdefault}",
+			"\\setCJKmainfont{標楷體}",
+			"",
+			"%% Chinese paragraph format",
+			"\\usepackage{indentfirst}",
+			"\\setlength{\\parindent}{2em}",
+			"",
+			"%% Page margin",
+			"\\usepackage[a4paper, total={6in,8in}]{geometry}",
+			"",
+			"%%% ========== Document ==========",
+			"\\begin{document}",
+			"\t$0",
+			"\\end{document}"
+		]
+	},
+
+	"slide_frame": {
+		"prefix": "\\frame",
+		"body": [
+			"\\begin{frame}",
+			"\t\\frametitle{\\secname}",
+			"",
+			"\t$0",
+			"",
+			"\\end{frame}"
+		]
+	},
+
+	"slide_subframe": {
+		"prefix": "\\subframe",
+		"body": [
+			"\\begin{frame}",
+			"\t\\frametitle{\\subsecname}",
+			"",
+			"\t$0",
+			"",
+			"\\end{frame}"
+		]
+	},
+
+	"hw_title_page": {
+		"prefix": ["title page", "homework"],
+		"body": [
+			"\\input{../TitlePage.tex}",
+			"\\MakeTitlePage{${1:NO.}}",
+			"\\includepdf[pages=-]{handout.pdf}"
+		]
+	},
+
+	"content_part": {
+		"prefix": "\\par",
+		"body": [
+			"\\par",
+			"$0"
+		]
+	},
+
+	"short_single_annotation":{
+		"prefix": "short single annotation",
+		"body": "% ---------- $0 ----------"
+	},
+
+	"short_double_command":{
+		"prefix": "short double annotation",
+		"body": "%%% ========== $0 =========="
+	},
+
+	"long_single_command":{
+		"prefix": "long single annotation",
+		"body": "% -------------------- $0 --------------------"
+	},
+
+	"long_double_command":{
+		"prefix": "long double annotation",
+		"body": "%%% ==================== $0 ===================="
+	}
+}

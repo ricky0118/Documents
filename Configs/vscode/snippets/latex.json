@@ -1,0 +1,195 @@
+{
+	"slide_header": {
+		"prefix": "slide header",
+		"body": [
+			"\\documentclass{beamer}",
+			"%%% ========== Settings ==========",
+			"% ----------  theme setup ----------",
+			"\\usetheme{CambridgeUS}",
+			"\\usecolortheme{wolverine}",
+			"\\setbeamertemplate{caption}[numbered]",
+			"\\setbeamertemplate{enumerate items}[default]",
+			"",
+			"% ---------- Chinese ----------",
+			"\\usepackage{xeCJK}      % Chinese words package",
+			"\\XeTeXlinebreaklocale \"zh\"",
+			"\\XeTeXlinebreakskip = 0pt plus 1pt",
+			"",
+			"% ---------- Fonts ----------",
+			"\\usepackage{fontspec}   % Word fonts package",
+			"\\setmainfont{Times New Roman}",
+			"\\renewcommand{\\familydefault}{\\rmdefault}",
+			"\\setCJKmainfont{標楷體}",
+			"\\usefonttheme{professionalfonts}",
+			"$1",
+			"%%% ========== Title setup ==========",
+			"\\date{$CURRENT_MONTH_NAME $CURRENT_DATE, $CURRENT_YEAR}",
+			"\\title{${2:title}}",
+			"\\author{Wu, Po Hsun}",
+			"",
+			"%%% ========== Document ==========",
+			"\\begin{document}",
+			"\t\\maketitle",
+			"",
+			"\t$0",
+			"",
+			"\\end{document}"
+		]
+	},
+
+	"doc_header": {
+		"prefix": "document header",
+		"body": [
+			"\\documentclass[a4paper, 12pt, AutoFakeBold]{article}",
+			"%%% ========== Settings ==========",
+			"\\usepackage[total={7in,9in}]{geometry}",
+			"% ---------- Chinese ----------",
+			"\\usepackage{xeCJK}",
+			"\\usepackage{indentfirst}",
+			"\\XeTeXlinebreaklocale \"zh\"",
+			"\\XeTeXlinebreakskip = 0pt plus 1pt",
+			"\\setlength{\\parindent}{2em}",
+			"",
+			"% ---------- Fonts ----------",
+			"\\usepackage{fontspec}",
+			"\\setmainfont{Times New Roman}",
+			"\\renewcommand{\\familydefault}{\\rmdefault}",
+			"\\setCJKmainfont{標楷體}",
+			"$1",
+			"%%% ========== Document ==========",
+			"\\begin{document}",
+			"\t$2",
+			"\\end{document}"
+		]
+	},
+
+	"mft_packages": {
+		"prefix": "latex packages",
+		"body": [
+			"",
+			"% ---------- Formating ----------",
+			"\\usepackage{listings}       % Script listing package",
+			"\\usepackage{graphicx}       % Scalebox package",
+			"\\usepackage{multicol}",
+			"\\usepackage{caption}",
+			"\\usepackage{subcaption}",
+			"",
+			"% ---------- Math ----------",
+			"\\usepackage{amsmath}        % Math matrix package",
+			"\\usepackage{amssymb}        % Math symbols",
+			"\\usepackage{resizegather}   % Math gather resizing",
+			"",
+			"% ---------- Figure ----------",
+			"\\usepackage{float}          % For figure [H] parameter place the graph",
+			"\\usepackage{wrapfig}        % Wrap Figure or table package",
+			"",
+			"% ---------- Table ----------",
+			"\\usepackage{multirow}",
+			"\\usepackage{makecell}",
+			"\\usepackage{array}          % Tabular \"m\" parameter",
+			"",
+			"% ---------- Other ----------",
+			"\\usepackage{pdfpages}",
+			"\\usepackage{hyperref}",
+			"",
+		]
+	},
+
+	"tikz_package": {
+		"prefix": "tikz packages",
+		"body": [
+			"",
+			"% ---------- Tikz ----------",
+			"\\usepackage{tikz}           % TikZ picture package(Docs: https://ftp.ntou.edu.tw/ctan/graphics/pgf/base/doc/pgfmanual.pdf)",
+			"\\usetikzlibrary{shapes.geometric}",
+			"\\usetikzlibrary{backgrounds}",
+			"\\usetikzlibrary{positioning}",
+			"\\usetikzlibrary{arrows.meta}",
+			"\\usetikzlibrary{calc}",
+			"\\usetikzlibrary{fit}",
+			"",
+		]
+	},
+
+	"bib_package": {
+		"prefix": "biblatex packages",
+		"body": [
+			"",
+			"% ---------- Biblatex ----------",
+			"% Docs: https://distrib-coffee.ipsl.jussieu.fr/pub/mirrors/ctan/macros/latex/contrib/biblatex/doc/biblatex.pdf",
+			"% Cheat Sheet: https://ftp.ntou.edu.tw/ctan/info/biblatex-cheatsheet/biblatex-cheatsheet.pdf",
+			"\\usepackage[backend=bibtex, style=ieee]{biblatex}",
+			"\\addbibresource{refs.bib}",
+			"\\ExecuteBibliographyOptions{eprint=false}",
+			"\\ExecuteBibliographyOptions{url=false}",
+			"\\ExecuteBibliographyOptions{dashed=false}",
+			"",
+		]
+	},
+
+	"split": {
+		"prefix": "\\",
+		"body": ["\\"]
+	},
+
+	"slide_frame": {
+		"prefix": "\\frame",
+		"body": [
+			"\\begin{frame}",
+			"\t\\frametitle{\\secname}",
+			"",
+			"\t$0",
+			"",
+			"\\end{frame}"
+		]
+	},
+
+	"slide_subframe": {
+		"prefix": "\\subframe",
+		"body": [
+			"\\begin{frame}",
+			"\t\\frametitle{\\subsecname}",
+			"",
+			"\t$0",
+			"",
+			"\\end{frame}"
+		]
+	},
+
+	"hw_title_page": {
+		"prefix": ["title page", "homework"],
+		"body": [
+			"\\input{../TitlePage.tex}",
+			"\\MakeTitlePage{${1:NO.}}",
+			"\\includepdf[pages=-]{handout.pdf}"
+		]
+	},
+
+	"content_part": {
+		"prefix": "\\par",
+		"body": [
+			"\\par",
+			"$0"
+		]
+	},
+
+	"short_single_annotation":{
+		"prefix": "short single annotation",
+		"body": "% ---------- $0 ----------"
+	},
+
+	"short_double_command":{
+		"prefix": "short double annotation",
+		"body": "%%% ========== $0 =========="
+	},
+
+	"long_single_command":{
+		"prefix": "long single annotation",
+		"body": "% -------------------- $0 --------------------"
+	},
+
+	"long_double_command":{
+		"prefix": "long double annotation",
+		"body": "%%% ==================== $0 ===================="
+	}
+}

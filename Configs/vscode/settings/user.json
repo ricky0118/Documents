@@ -1,0 +1,22 @@
+{
+    "editor.fontSize": 16,
+    "editor.minimap.enabled": false,
+    "editor.wordWrap": "on",
+
+    "files.autoSave": "onFocusChange",
+    "files.encoding": "utf8",
+    "files.trimTrailingWhitespace": true,
+    "files.autoGuessEncoding": false,
+
+    "workbench.startupEditor": "none",
+    "workbench.iconTheme": "vscode-icons",
+
+    "terminal.integrated.fontSize": 16,
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+
+    "vim.smartRelativeLine": true,
+
+    "vsicons.dontShowNewVersionMessage": true,
+    "extensions.ignoreRecommendations": true,
+    "kite.showWelcomeNotificationOnStartup": false,
+}

@@ -1,76 +1,47 @@
 {
-    "[latex]":{
-        "files.autoSave": "off",
-        "files.associations": {
-            "*.tikz": "latex"
-        }
-    },
+    // ======== Latex setup ========
+    "files.autoSave": "off",
+    "files.associations": {"*.tikz": "latex"},
+
     "latex-workshop.view.pdf.viewer": "tab",
     "latex-workshop.latex.autoBuild.run": "onSave",
     "latex-workshop.latex.autoClean.run": "onBuilt",
     "latex-workshop.synctex.afterBuild.enabled": true,
     "latex-workshop.synctex.synctexjs.enabled": true,
-    "latex-workshop.view.pdf.external.viewer.command": "",
-    "latex-workshop.latex.recipes": [
-        {
-            "name": "xelatex*2",
-            "tools": [
-                "xelatex",
-                "xelatex"
-            ]
-        },
-        {
-            "name": "xelatex->bibtex->xelatex*2",
-            "tools": [
-                "xelatex",
-                "bibtex",
-                "xelatex",
-                "xelatex"
-            ]
-        },
-        {
-            "name": "pdflatex->bibtex->pdflatex*2",
-            "tools": [
-                "pdflatex",
-                "bibtex",
-                "pdflatex",
-                "pdflatex"
-            ]
-        },
-        {
-            "name": "pdflatex",
-            "tools": [
-                "pdflatex"
-            ]
-        }
-    ],
+    "latex-workshop.view.pdf.external.viewer.command": "C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe",
     "latex-workshop.latex.tools": [
         {
             "name": "xelatex",
-            "command": "",
-            "args": [
-                "-synctex=1",
-                "--halt-on-error",
-                "-shell-escape",
-                "%DOC%.tex"
-            ]
+            "command": "<xelatex path or command>",
+            "args": ["-synctex=1", "--halt-on-error", "-shell-escape", "%DOC%.tex"]
         },
         {
             "name": "bibtex",
-            "command": "",
-            "args": [
-                "%DOCFILE%"
-            ]
+            "command": "<xelatex path or command>",
+            "args": ["%DOCFILE%"]
         },
         {
             "name": "pdflatex",
-            "command": "",
-            "args": [
-                "-synctex=1",
-                "--halt-on-error",
-                "-file-line-error",
-                "%DOC%"
-            ]
+            "command": "<xelatex path or command>",
+            "args": ["-synctex=1", "--halt-on-error", "-file-line-error", "%DOC%"]
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "xelatex*2",
+            "tools": ["xelatex", "xelatex"]
+        },
+        {
+            "name": "xelatex->bibtex->xelatex*2",
+            "tools": ["xelatex", "bibtex", "xelatex", "xelatex"]
+        },
+        {
+            "name": "pdflatex->bibtex->pdflatex*2",
+            "tools": ["pdflatex", "bibtex", "pdflatex", "pdflatex"]
+        },
+        {
+            "name": "pdflatex",
+            "tools": ["pdflatex"]
         }
     ],
     "latex-workshop.latex.clean.fileTypes": [

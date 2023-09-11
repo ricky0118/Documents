@@ -1,18 +1,12 @@
 {
-    "[python]": {
-        "files.autoSave": "onFocusChange",
-        "editor.formatOnSaveMode": "file",
-        "editor.formatOnSave": true
-    },
-    "python.defaultInterpreterPath": "",
+    // ======== Python setup ========
     "python.terminal.activateEnvironment": true,
-
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true,
-    "python.linting.pylintArgs": [
-        "--disable=line-too-long",
-        "--disable=too-many-instance-attributes"
-    ],
     "python.analysis.typeCheckingMode": "basic",
-    "python.formatting.provider": "black",
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        }
+    },
 }

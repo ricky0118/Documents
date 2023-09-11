@@ -1,56 +1,21 @@
 {
+    // ======== TODO tree setup ========
     "todo-tree.tree.autoRefresh": true,
     "todo-tree.highlights.customHighlight": {
-        "WARN": {
-            "foreground": "white",
-            "background": "red",
-            "iconColour": "red",
-            "icon": "alert",
-            "type": "text"
-        },
         "TODO": {
-            "foreground": "black",
-            "background": "green",
-            "iconColour": "green",
-            "icon": "check",
-            "type": "text"
+            "foreground": "white", "background": "green",
+            "iconColour": "lime", "icon": "check"
         },
-        "FIXME": {
-            "foreground": "black",
-            "background": "red",
-            "iconColour": "red",
-            "icon": "bug"
+        "BUG": {
+            "foreground": "white", "background": "indianred",
+            "iconColour": "crimson", "icon": "bug"
         },
         "REVIEW": {
-            "foreground": "black",
-            "background": "cyan",
-            "iconColour": "lightblue",
-            "icon": "eye"
+            "foreground": "white", "background": "darkcyan",
+            "iconColour": "cyan", "icon": "eye"
         },
-        "HACK": {
-            "foreground": "black",
-            "background": "#FFA500",
-            "iconColour": "orange",
-            "icon": "alert"
-        },
-        "REF": {
-            "foreground": "black",
-            "background": "grey",
-            "iconColour": "grey",
-            "icon": "link",
-            "type": "tag"
-        }
     },
-    "todo-tree.highlights.defaultHighlight": {
-        "type": "text-and-comment"
-    },
-    "todo-tree.general.tags": [
-        "TODO",
-        "FIXME",
-        "REVIEW",
-        "HACK",
-        "REF",
-        "WARN"
-    ],
+    "todo-tree.highlights.defaultHighlight": {"type": "text-and-comment"},
+    "todo-tree.general.tags": ["TODO", "REVIEW", "BUG"],
     "todo-tree.regex.regex": "(%|//|#|<!--|;|/\\*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)",
 }
